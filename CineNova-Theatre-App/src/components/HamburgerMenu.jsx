@@ -18,6 +18,14 @@ const HamburgerMenu = () => {
     }, [mobileMenu]);
     */
 
+    
+    const [isMenuVisible, setIsMenuVisible] = useState(true);
+
+    useEffect(() => {
+        const screenWidth = window.innerWidth;
+        setIsMenuVisible(screenWidth <= 875);
+    }, []);
+
     const toggleMenu = () => { 
         /*setMobileMenu(!mobileMenu);
 
@@ -26,19 +34,33 @@ const HamburgerMenu = () => {
             refMenuBackdrop.current.style.display = mobileMenu ? "flex" : "none";
         }*/
 
-        document.getElementById("navMenu").style.width = "20rem";
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const navMenu = document.getElementById("navMenu");
+        const menuBackdrop = document.getElementById("menuBackdrop");
+
+        if (hamburgerIcon) {
+            if (isMenuVisible) {
+                hamburgerIcon.style.display = 'none';
+            }
+            else {
+                hamburgerIcon.style.display = 'flex';
+            }
+        }
+        setIsMenuVisible(!isMenuVisible);
+
+        navMenu.style.width = "20rem";
         //document.getElementById("menuBackdrop").style.marginRight = "250px";
-        document.getElementById("menuBackdrop").style.display = "block";
-        document.getElementById("menuBackdrop").style.backgroundColor = "rgba(50,50,50,0.5)";
-        document.getElementById("hamburgerIcon").style.display = "none";
+        menuBackdrop.style.display = "block";
+        menuBackdrop.style.backgroundColor = "rgba(50,50,50,0.5)";
+        hamburgerIcon.style.display = "none";
     } 
 
     const closeMenu = () => {
-        document.getElementById("navMenu").style.width = "0";
+        navMenu.style.width = "0";
         document.body.style.marginRight = "0";
-        document.getElementById("menuBackdrop").style.display = "none";
-        document.getElementById("menuBackdrop").style.backgroundColor = "white";
-        document.getElementById("hamburgerIcon").style.display = "flex";
+        menuBackdrop.style.display = "none";
+        menuBackdrop.style.backgroundColor = "white";
+        hamburgerIcon.style.display = "flex";
     }
 
 
@@ -49,7 +71,7 @@ const HamburgerMenu = () => {
     </button>
     <div id='menuBackdrop' className='hidden w-[100%] h-[100%] bg-gray-500 z-20'></div>
     <nav id='navMenu' className='w-0 h-[100%] fixed top-0 right-0 overflow-x-hidden border-black bg-[#fb4242e0] dark:bg-[#192734] z-30 transition: 0.5s shadow-md'>
-        <a href="javascript:void(0)" onClick={closeMenu} className='text-6xl justify-end ml-3'>&times;</a>
+        <a onClick={closeMenu} className='text-5xl right-0 mt-5 ml-3 cursor-pointer dark:text-white'>&times;</a>
         <ul className='flex flex-col justify-center items-center text-[#192734] gap-10 text-3xl font-bold mt-20 dark:text-white'>
             <li className='mobile-menu:hidden'>
                 <a href="/" className='hover:text-[#426383] transition duration-300 ease-in-out'>Home</a>

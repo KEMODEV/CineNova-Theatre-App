@@ -35,10 +35,10 @@ const Header = () => {
         </li>
         
       </ul>
-      <button onClick={toggleTheme} className='ml-auto mr-3 mobile-menu:flex'> 
+      <button onClick={toggleTheme} className='ml-auto mr-5 mobile-menu:flex'> 
       { 
         isDarkMode 
-          ? <BsSun className="block text-white text-[2.0rem] mt-1 gap-2 lg:mt-2 mobile-menu:text-2xl lg:text-3xl" /> 
+          ? <BsSun className="block text-white text-[2.0rem] mobile:menu:mt-1 gap-2 lg:mt-2 mobile-menu:text-2xl lg:text-3xl" /> 
           : <BsMoonStars className='block text-[1.73rem] gap-10 lg:text-[1.8rem] mt-1 lg:mt-2 lg:text-3xl' />
       } 
       </button>
