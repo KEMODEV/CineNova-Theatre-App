@@ -1,3 +1,15 @@
+@import url('https://fonts.cdnfonts.com/css/sansation');
 @tailwind base;
+
+@layer base {
+  h1 {
+    @apply font-bold;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
+
+/* * {
+    font-family: 'Sansation', sans-serif;
+}*/
