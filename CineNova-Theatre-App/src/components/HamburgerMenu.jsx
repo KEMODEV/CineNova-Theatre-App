@@ -12,17 +12,17 @@ const HamburgerMenu = (props) => {
     
         {isMenuVisible ? (
             <button
-            className="flex text-5xl text-white items-center cursor-pointer fixed right-10 top-6 z-50 mobile-menu:hidden hover:text-[#192734] dark:hover:text-[#fb4242] transition duration-300 ease-in-out"
-            onClick={() => setIsMenuVisible(!isMenuVisible)}
-            >
-            &times;
+                className="flex text-5xl text-white items-center cursor-pointer fixed right-10 top-6 z-50 mobile-menu:hidden hover:text-[#192734] dark:hover:text-[#fb4242] transition duration-300 ease-in-out"
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+                >
+                &times;
             </button>
         ) : (
             <svg
                 onClick={() => setIsMenuVisible(!isMenuVisible)}
                 className="fixed z-30 flex items-center cursor-pointer text-[#192734] right-10 mt-1 mobile-menu:hidden"
                 viewBox="0 0 100 80"
-                fill={props.darkMode ? "#192734" : "#FFF"}
+                fill={props.darkMode ? "#FFF" : "#192734"}
                 width="40"
                 height="40"
             >

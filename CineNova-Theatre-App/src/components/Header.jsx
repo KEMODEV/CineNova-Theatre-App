@@ -6,9 +6,9 @@ import { BsMoonStars, BsSun } from "react-icons/bs"
 import { FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa'
 import logo from '../images/logo/new_cinenova_logo.svg'
 
-const Header = () => {
+const Header = (props) => {
 
-  const storedDarkMode = localStorage.getItem("DARK_MODE");
+  /*const storedDarkMode = localStorage.getItem("DARK_MODE");
   const [darkMode, setDarkMode] = useState(storedDarkMode);
   //const darkModeRef = useRef();
 
@@ -19,7 +19,7 @@ const Header = () => {
 
   useEffect(() => {
     localStorage.setItem("DARK_MODE", darkMode);
-  }, [darkMode])
+  }, [darkMode])*/
 
   return (
     <header className='flex dark:bg-[#192734] shadow-md items-center py-1 md:py-3 lg:py-5 px-6 border-b-[0.35rem] border-[#fb4242]'>
@@ -40,14 +40,14 @@ const Header = () => {
         </li>
         
       </ul>
-      <button onClick={toggleTheme} className='absolute ml-auto mr-5 right-[100px] xl:mr-10 mobile-menu:flex mobile-menu:static mobile-menu:right-0'> 
+      <button onClick={props.toggleTheme} className='absolute ml-auto mr-5 right-[100px] xl:mr-10 mobile-menu:flex mobile-menu:static mobile-menu:right-0'> 
       { 
-        darkMode 
-          ? <BsMoonStars className='block text-[1.73rem] gap-10 lg:text-[1.8rem] mt-1 lg:text-3xl' /> 
-          : <BsSun className='block text-white text-[2.0rem] mobile:menu:mt-1 gap-2 mobile-menu:text-[2rem]' />
+        props.darkMode 
+          ? <BsSun className='block text-white text-[2.0rem] mobile:menu:mt-1 gap-2 mobile-menu:text-[2rem]' />
+          : <BsMoonStars className='block text-[1.73rem] gap-10 lg:text-[1.8rem] mt-1 lg:text-3xl' /> 
       } 
       </button>
-      <HamburgerMenu darkMode={darkMode} />
+      <HamburgerMenu darkMode={props.darkMode} />
     </nav>
     <div className='hidden justify-between items-end w-[100%] mobile-menu:flex'>
     <ul className='flex justify-end gap-3 ml-auto'>

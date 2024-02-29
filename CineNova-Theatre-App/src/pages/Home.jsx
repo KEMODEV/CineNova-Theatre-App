@@ -2,11 +2,12 @@ import React from 'react'
 import Header from '../components/Header'
 import HomeBody from '../components/HomeBody'
 
-const Home = () => {
+const Home = (props) => {
+
   return (
     <>
-    <Header />
-    <HomeBody />
+    <Header toggleTheme={props.toggleTheme} darkMode={props.darkMode} />
+    <HomeBody darkMode={props.darkMode} />
     </>
   )
 }
