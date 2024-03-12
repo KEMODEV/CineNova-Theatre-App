@@ -1,15 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa'
 
 const HamburgerMenu = (props) => {
     
-    const [isMenuVisible, setIsMenuVisible] = useState(false);
-
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
     <>
-    
         {isMenuVisible ? (
             <button
                 className="flex text-5xl text-white items-center cursor-pointer fixed right-10 top-6 z-50 mobile-menu:hidden hover:text-[#192734] dark:hover:text-[#fb4242] transition duration-300 ease-in-out"
@@ -37,7 +36,7 @@ const HamburgerMenu = (props) => {
         >
             <ul className='flex flex-col justify-center items-center w-[100%] mt-[-5rem] mr-[2.0rem] divide-y-2 divide-white dark:divide-[#fb4242] text-[#192734] space-y-10 text-[1.4rem] sm:text-[1.55rem] md:text-[1.65rem] font-bold dark:text-white'>
                 <li className='mb-[-0.3rem] mobile-menu:hidden'>
-                    <a href="/" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>Home</a>
+                    <Link to="/" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'><span>Home</span></Link>
                 </li>
                 <li className='mb-[-0.1rem] pt-8 sm:pt-9 sm:pb-1 mobile-menu:hidden'>
                     <a href="#nowPlaying" className='text-center hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>Now Playing</a>
@@ -46,7 +45,7 @@ const HamburgerMenu = (props) => {
                     <a href="#upcoming" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>Upcoming</a>
                 </li>
                 <li className='pt-7 mobile-menu:hidden'>
-                    <a href="/contact" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>Contact</a>
+                    <Link to="/contact" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'><span>Contact</span></Link>
                 </li>
             </ul>
 

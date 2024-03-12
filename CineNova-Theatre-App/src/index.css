@@ -13,3 +13,7 @@
 /* * {
     font-family: 'Sansation', sans-serif;
 }*/
+
+html.dark {
+  background-color: #192734;
+}

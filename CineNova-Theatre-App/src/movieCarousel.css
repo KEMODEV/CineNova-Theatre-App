@@ -1,0 +1,29 @@
+.carousel-cell {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.carousel-cell img {
+  display: block;
+  height: 200px;
+}
+
+@media screen and ( min-width: 768px ) {
+  .carousel-cell img {
+      height: 400px;
+  }
+}
+
+
+.main-carousel {
+  display: flex;
+  left: 10%;
+}
+
+.main-carousel.flickity-enabled {
+  display: block;
+}
+
+.flickity-button {
+  z-index: 40;
+} 
