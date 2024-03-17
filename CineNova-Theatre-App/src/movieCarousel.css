@@ -1,29 +1,123 @@
 .carousel-cell {
   margin-right: 20px;
   overflow: hidden;
+  width: auto;
+  height: auto;
+  cursor: default;
 }
 
 .carousel-cell img {
   display: block;
   height: 200px;
+  transition: transform .2s;
 }
 
-@media screen and ( min-width: 768px ) {
-  .carousel-cell img {
-      height: 400px;
-  }
-}
-
+.carousel-cell img:hover {
+  transform: scale(1.05);
+} 
 
 .main-carousel {
   display: flex;
+  margin: 40px;
   left: 10%;
+  cursor: default;
 }
 
 .main-carousel.flickity-enabled {
   display: block;
+  cursor: default;
 }
 
 .flickity-button {
+  color: #192734;
   z-index: 40;
+  cursor: pointer;
 } 
+
+.flickity-button:focus {
+  box-shadow: 0 0 0 4px #192734;
+}
+
+.dark .flickity-button {
+  background-color: #ffffffad;
+}
+
+.dark .flickity-button:focus {
+  box-shadow: 0 0 0 4px #fb4242;
+}
+
+.flickity-viewport {
+  cursor: grab;
+}
+
+.flickity-button {
+  background-color: #747474a8;
+  transition: 100ms ease-in-out;
+}
+
+.flickity-page-dot {
+  background-color: hsl(0 0% 20% / 40%);
+}
+
+.flickity-page-dot.is-selected {
+  background-color: rgba(25, 39, 52, 1.0);
+}
+
+.dark .flickity-page-dot {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .flickity-page-dot.is-selected {
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+
+@media screen and (min-width: 640px /* sm: */) {
+  .carousel-cell img {
+    height: 250px;
+  }
+
+  .flickity-viewport {
+    height: 350px;
+  }
+}
+
+@media screen and (min-width: 768px /* md: */) {
+  .carousel-cell img {
+    height: 300px;
+  }
+
+  .flickity-viewport {
+    height: 400px;
+  }
+}
+
+@media screen and (min-width: 1024px /* lg: */) {
+  .carousel-cell img {
+    height: 350px;
+  }
+
+  .flickity-viewport {
+    height: 450px;
+  }
+}
+
+/* @media screen and (min-width: 1280px /* xl *//*) {
+  .carousel-cell img {
+    height: 400px;
+  }
+
+  .flickity-viewport {
+    height: 500px;
+  }
+} */
+
+@media screen and (min-width: 1536px /* 2xl */) {
+  .carousel-cell img {
+    height: 400px;
+  }
+
+  .flickity-viewport {
+    height: 500px;
+  }
+}

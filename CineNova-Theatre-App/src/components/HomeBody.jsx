@@ -19,16 +19,16 @@ const HomeBody = (props) => {
     });
 
     const movieSections = movieSectionsRef.current;
-    movieSections.forEach((el) => observer.observe(el));
+    movieSections.forEach((elem) => observer.observe(elem));
 
     return () => {
-      movieSections.forEach((el) => observer.unobserve(el));
+      movieSections.forEach((elem) => observer.unobserve(elem));
     };
   }, []);
 
-  const setMovieSectionsRef = (el) => {
-    if (el) {
-      movieSectionsRef.current.push(el);
+  const setMovieSectionsRef = (elem) => {
+    if (elem) {
+      movieSectionsRef.current.push(elem);
     }
   };
 
@@ -41,26 +41,43 @@ const HomeBody = (props) => {
       percentPosition: false,
     });
 
-    // const imgs = elem.querySelectorAll('.carousel-cell img');
-    // get transform property
-    // const docStyle = document.documentElement.style;
-    //const transformProp = typeof docStyle.transform == 'string' ? 'transform' : 'WebkitTransform';
+    const carouselCells = elem.querySelectorAll('.carousel-cell');
+    const imgs = elem.querySelectorAll('.carousel-cell img');
 
-    /*flkty.on('scroll', () => {
-      flkty.slides.forEach( (slide, i) => {
+    //const neonYellowBorder = "carousel-cell w-32 h-auto dark:border-4 rounded-[6px] dark:border-[#ffff0000] dark:border-[#ffff00] dark:shadow-[0_0_1px_#fff,inset_0_0_1px_#fff,0_0_3px_#FFFF00,0_0_8px_#FFFF00,0_0_14px_#FFFF00] drop-shadow-[0_10px_10px_rgba(255,255,0,0.5)] transition duration-500 ease-in-out";
+    flkty.on('scroll', () => {
+      const centerSlideIndex = parseInt(flkty.selectedIndex); // Get the index of the centered slide
+    
+      flkty.slides.forEach((slide, i) => {
+        const carouselCell = carouselCells[i];
         const img = imgs[i];
-        const x = (slide.target + flkty.x) * -1/3;
-        img.style[transformProp] = 'translateX(' + x  + 'px)';
+        
+        // Check if the slide is before or after the centered slide
+        if (i <= centerSlideIndex - 1 || i >= centerSlideIndex + 1) {
+          carouselCell.style.opacity = '0.5';
+          /*carouselCell.addEventListener("mouseover", () => { 
+            carouselCell.style.transform = "scale(1.1)";
+          });
+          carouselCell.addEventListener("mouseout", () => { 
+            carouselCell.style.transform = "scale(1)";
+          });*/
+          img.style.cursor = 'grab';
+          //carouselCell.className = prevCellClassName;
+        } else {
+          carouselCell.style.opacity = '1'; 
+          img.style.cursor = 'pointer';
+          //carouselCell.className = neonYellowBorder;
+        }
       });
-    });*/
-  })
+    });
+  });
   
 
   return (
     <>
     <main className='size-full pb-20 mt-[7.2rem] sm:mt-[7.7rem] md:mt-[9.53rem] lg:mt-[10.53rem]'>
         <article
-          className='bg-[length:2400px_1600px] bg-no-repeat bg-center flex justify-center items-center w-full h-[23rem] lg:h-[25rem] xl:h-[27rem]'
+          className='bg-[length:2400px_1600px] bg-no-repeat bg-center flex justify-center items-center w-full h-[19rem] sm:h-[23rem] lg:h-[25rem] xl:h-[27rem]'
           style={{ backgroundImage: `url(${IntroBg})` }}
         >
           <div className='flex flex-col justify-center items-center bg-[rgba(111,111,111,0.5)] rounded-[0.94rem] w-[85%] md:w-[80%] lg:w-[75%] max-w-[60rem] h-[90%] md:h-[95%] text-white'>
@@ -84,41 +101,53 @@ const HomeBody = (props) => {
           </div>
         </article>
         
-        <section 
-          ref={setMovieSectionsRef} 
-          className="main-carousel w-[75%]"
+
+
+        <article 
+          ref={setMovieSectionsRef}
+          className='movie-section flex flex-col justify-center items-center mt-12 mx-20 pt-7 bg-[#fb424200] border-4 dark:border-2 border-[#fb4242a9] dark:border-[#FFF] rounded-xl dark:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_10px_#fb4242,0_0_20px_#fb4242,0_0_40px_#fb4242]'
         >
-          <div className="carousel-cell">
-            <img 
-              src='src/images/posters/now_playing/dracula_movie_poster.jpg' 
-              className='w-auto h-auto'
-            />
-            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Dracula</p>
-          </div>
-          <div className="carousel-cell">
-            <img 
-              src="src/images/posters/now_playing/mummy_poster.jpg"
-              className='w-full h-auto'
-            />
-            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Mummy</p>
-          </div>
-          <div className="carousel-cell">
-            <img 
-              src="src/images/posters/now_playing/frankenstein_poster.jpg"
-              className='w-full h-auto'
-            />
-            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Frankenstein</p>
-          </div>
-          <div className="carousel-cell">
-            <img 
-              src="src/images/posters/now_playing/invisible_man_poster.jpg"
-              className='w-full h-auto'
-            />
-            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Invisible Man</p>
-          </div>
-        </section>
+          <h1 
+            className='text-[#fb4242] text-4xl text-bold'
+            style={ props.darkMode ? { textShadow: "#FFF 1.5px 1.5px" } : { textShadow: "#000 2px 2px" } }
+          >
+            Now Playing
+          </h1>
+          <hr className='box-content border-[#192734bd] dark:border-[#ffff00] border-t-2 border-b-2 text-[1.2rem] px-44 mt-3 rounded-[6px] dark:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_10px_#FFFF00,0_0_20px_#FFFF00,0_0_40px_#FFFF00]' />
 
-
+          <section 
+            className="main-carousel w-[75%]"
+          >
+            <div className="carousel-cell w-32 h-auto">
+              <img 
+                src='src/images/posters/now_playing/dracula_movie_poster.jpg' 
+                className='w-auto h-auto'
+              />
+              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Dracula</p>
+            </div>
+            <div className="carousel-cell w-32 h-auto">
+              <img 
+                src="src/images/posters/now_playing/mummy_poster.jpg"
+                className='w-full h-auto'
+              />
+              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Mummy</p>
+            </div>
+            <div className="carousel-cell w-32 h-auto">
+              <img 
+                src="src/images/posters/now_playing/frankenstein_poster.jpg"
+                className='w-full h-auto'
+              />
+              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Frankenstein</p>
+            </div>
+            <div className="carousel-cell w-32 h-auto">
+              <img 
+                src="src/images/posters/now_playing/invisible_man_poster.jpg"
+                className='w-full h-auto'
+              />
+              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 dark:border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Invisible Man</p>
+            </div>
+          </section>
+        </article>
 
 
         <article 
