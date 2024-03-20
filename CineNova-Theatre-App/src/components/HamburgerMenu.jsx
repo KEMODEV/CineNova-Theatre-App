@@ -32,7 +32,7 @@ const HamburgerMenu = (props) => {
         )}
         
         <nav
-            className={`flex flex-col justify-center items-center top-0 right-0 w-[48vw] bg-[#fb4242] dark:bg-[#192734] p-10 pl-20 text-white fixed h-full z-40 ease-in-out duration-300 mobile-menu:hidden md:w-[40vw] ${isMenuVisible ? "translate-x-0 " : "translate-x-full"}`}
+            className={`flex flex-col justify-center items-center top-0 right-0 w-[48vw] h-[595%] sm:h-[580%] bg-[#fb4242] dark:bg-[#192734] p-10 pl-20 text-white fixed z-40 ease-in-out duration-300 mobile-menu:hidden md:w-[40vw] ${isMenuVisible ? "translate-x-0 " : "translate-x-full"}`}
         >
             <ul className='flex flex-col justify-center items-center w-[100%] mt-[-5rem] mr-[2.0rem] divide-y-2 divide-white dark:divide-[#fb4242] text-[#192734] space-y-10 text-[1.4rem] sm:text-[1.55rem] md:text-[1.65rem] font-bold dark:text-white'>
                 <li className='mb-[-0.3rem] mobile-menu:hidden'>

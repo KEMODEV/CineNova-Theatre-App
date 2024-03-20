@@ -123,7 +123,7 @@ const Header = (props) => {
   return (
     <header 
       ref={headerRef}
-      className='flex fixed top-0 left-0 right-0 bg-white dark:bg-[#192734] shadow-md items-center py-1 md:py-3 lg:py-5 px-6 border-b-[0.35rem] border-[#fb4242] translate-y-0 transform duration-300 ease-in-out z-50'
+      className='flex fixed top-0 left-0 right-0 bg-white dark:bg-[#192734] shadow-md items-center py-7 md:py-5 px-6 border-b-[0.45rem] border-[#fb4242] translate-y-0 transform duration-300 ease-in-out z-50'
     >
     <Link 
       to="/"

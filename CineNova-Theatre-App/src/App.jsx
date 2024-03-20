@@ -13,10 +13,10 @@ function App() {
   const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
 
   useEffect(() => {
-    const docuemntClassList = document.documentElement.classList;
+    const documentClassList = document.documentElement.classList;
     darkMode
-      ? docuemntClassList.add("dark")
-      : docuemntClassList.remove("dark");
+      ? documentClassList.add("dark")
+      : documentClassList.remove("dark");
   }, [darkMode]);
 
   const toggleTheme = () => {

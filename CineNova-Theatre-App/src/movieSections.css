@@ -1,8 +1,0 @@
-.movie-section {
-    opacity: 0;
-    transition: all 1.5s;
-}
-
-.fade-in {
-    opacity: 1;
-}

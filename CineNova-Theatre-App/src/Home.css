@@ -1,0 +1,146 @@
+/* Movie Sections */
+.movie-section {
+    opacity: 0;
+    transition: all 1.5s;
+    /* background-image: url(''); */
+}
+
+.dark .movie-section {
+    background-image: url('./images/bg_patterns/memphis-mini-dark.jpg');
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+/* Flickity carousel */
+.main-carousel {
+    display: flex;
+    width: 100%;
+    margin: 40px;
+    cursor: default;
+}
+
+.main-carousel.flickity-enabled {
+    display: block;
+    cursor: default;
+}
+
+.carousel-cell {
+    margin-right: 20px;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    cursor: default;
+}
+  
+.carousel-cell img {
+    display: block;
+    height: 250px;
+    border-radius: 10px 10px 0 0;
+    z-index: 4;
+    transition: transform .2s;
+}
+
+/* .carousel-cell img:hover {
+    transform: scale(1.02);
+} */
+
+.carousel-cell p {
+    z-index: 5;
+}
+
+.flickity-button {
+    color: #192734;
+    z-index: 40;
+    cursor: pointer;
+} 
+
+.flickity-button:focus {
+    box-shadow: 0 0 0 4px #192734;
+}
+
+.dark .flickity-button {
+    background-color: #ffffffad;
+}
+
+.dark .flickity-button:focus {
+    box-shadow: 0 0 0 4px #fb4242;
+}
+
+.flickity-viewport {
+    cursor: grab;
+}
+
+.flickity-button {
+    background-color: #747474a8;
+    transition: 100ms ease-in-out;
+}
+
+.flickity-page-dot {
+    display: none;
+    background-color: hsl(0 0% 20% / 40%);
+}
+
+.flickity-page-dot.is-selected {
+    background-color: rgba(25, 39, 52, 1.0);
+}
+
+.dark .flickity-page-dot {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .flickity-page-dot.is-selected {
+background-color: rgba(255, 255, 255, 1.0);
+}
+
+
+@media screen and (min-width: 640px /* sm: */) {
+    .carousel-cell img {
+        height: 300px;
+    }
+
+    .flickity-viewport {
+        height: 4000px;
+    }
+}
+
+@media screen and (min-width: 768px /* md: */) {
+    .carousel-cell img {
+        height: 350px;
+    }
+
+    .flickity-viewport {
+        height: 450px;
+    }
+}
+
+@media screen and (min-width: 1024px /* lg: */) {
+    .carousel-cell img {
+        height: 350px;
+    }
+
+    .flickity-viewport {
+        height: 450px;
+    }
+}
+
+/* @media screen and (min-width: 1280px /* xl *//*) {
+.carousel-cell img {
+    height: 400px;
+}
+
+.flickity-viewport {
+    height: 500px;
+}
+} */
+
+@media screen and (min-width: 1536px /* 2xl */) {
+    .carousel-cell img {
+        height: 400px;
+    }
+
+    .flickity-viewport {
+        height: 500px;
+    }
+}
