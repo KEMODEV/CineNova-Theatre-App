@@ -4,7 +4,7 @@ import { IoMdPin } from "react-icons/io"
 
 const Contact = (props) => {
   return (
-    <main className='size-full pb-20 mt-[10.25rem] mobile-menu:mt-[11.53rem]'>
+    <main className='size-full pb-20 mt-[10.53rem] xl:mt-[13rem] mobile-menu:mt-[12.53rem]'>
       <div className='flex flex-col justify-center items-center'>
         <h1 
           className='text-[#fb4242] text-4xl text-bold'

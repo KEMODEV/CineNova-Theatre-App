@@ -23,34 +23,39 @@ function App() {
     setDarkMode(!darkMode);
   }
 
+  window.addEventListener("load", () => {
+    console.log("loaded");
+  })
+
+
   return (
     <>
-      {/*<Home toggleTheme={toggleTheme} darkMode={darkMode} />*/}
-      
-      <Router>
-        <Header 
-          toggleTheme={toggleTheme} 
-          darkMode={darkMode} 
+    {/*<Home toggleTheme={toggleTheme} darkMode={darkMode} />*/}
+    <div id='overlay'></div>
+    <Router>
+      <Header 
+        toggleTheme={toggleTheme} 
+        darkMode={darkMode} 
+      />
+      <Routes>
+        <Route 
+          path="/" 
+          element={<HomeBody darkMode={darkMode} />}
         />
-        <Routes>
-          <Route 
-            path="/" 
-            element={<HomeBody darkMode={darkMode} />}
-          />
-          <Route 
-            path="/contact" 
-            element={<Contact darkMode={darkMode} />} 
-          />
-          <Route 
-            path="/tickets" 
-            element={<Tickets darkMode={darkMode} />} 
-          />
-          <Route 
-            path="/billing" 
-            element={<Billing darkMode={darkMode} />} 
-          />
-        </Routes>
-      </Router>
+        <Route 
+          path="/contact" 
+          element={<Contact darkMode={darkMode} />} 
+        />
+        <Route 
+          path="/tickets" 
+          element={<Tickets darkMode={darkMode} />} 
+        />
+        <Route 
+          path="/billing" 
+          element={<Billing darkMode={darkMode} />} 
+        />
+      </Routes>
+    </Router>
     </>
   )
 }

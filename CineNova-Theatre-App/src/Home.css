@@ -1,3 +1,7 @@
+#features-list {
+    list-style: url('/Users/Tristan/dev/projects/website/Learning/Learn React/Vite/CineNova-Theatre-App/CineNova-Theatre-App/node_modules/react-icons/md/MdStarBorderPurple500');
+} 
+
 /* Movie Sections */
 .movie-section {
     opacity: 0;
@@ -6,7 +10,7 @@
 }
 
 .dark .movie-section {
-    background-image: url('./images/bg_patterns/memphis-mini-dark.jpg');
+    background-image: url('');
 }
 
 .fade-in {
@@ -47,13 +51,16 @@
 } */
 
 .carousel-cell p {
+    cursor: default;
     z-index: 5;
 }
 
 .flickity-button {
     color: #192734;
+    background-color: #ffffffa8;
     z-index: 40;
     cursor: pointer;
+    transition: 100ms ease-in-out;
 } 
 
 .flickity-button:focus {
@@ -64,17 +71,16 @@
     background-color: #ffffffad;
 }
 
+.dark .flickity-button:hover {
+    background-color: #fff;
+}
+
 .dark .flickity-button:focus {
     box-shadow: 0 0 0 4px #fb4242;
 }
 
 .flickity-viewport {
     cursor: grab;
-}
-
-.flickity-button {
-    background-color: #747474a8;
-    transition: 100ms ease-in-out;
 }
 
 .flickity-page-dot {
@@ -112,6 +118,10 @@ background-color: rgba(255, 255, 255, 1.0);
 
     .flickity-viewport {
         height: 450px;
+    }
+
+    .flickity-button {
+        margin: auto 5%;
     }
 }
 
