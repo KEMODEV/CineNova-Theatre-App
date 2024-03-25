@@ -23,11 +23,12 @@ function App() {
     setDarkMode(!darkMode);
   }
 
-  window.addEventListener("load", () => {
-    console.log("loaded");
-  })
+  /*window.addEventListener("load", () => {
+    document.title="CineNova";
+  })*/
 
 
+  
   return (
     <>
     {/*<Home toggleTheme={toggleTheme} darkMode={darkMode} />*/}

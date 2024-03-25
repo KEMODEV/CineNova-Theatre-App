@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import HamburgerMenu from './HamburgerMenu'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { BsMoonStars, BsSun } from "react-icons/bs"
 import { FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa'
 import logo from '../images/logo/cinenova_logo.png'
@@ -13,7 +13,33 @@ const Header = (props) => {
   const cinenovaTitleRef = useRef(null);
   const navRef = useRef(null);
   const prevScrollCoordsRef = useRef(0);
+
+  // Updating the tab title
+  const location = useLocation();
+  let title = document.title;
+  switch (true) {
+    case location.pathname == "/contact":
+        document.title = "CineNova - Contact";
+        console.log(location.pathname);
+        break;
+
+    case location.pathname == "/tickets":
+        document.title = "CineNova - Tickets & Seating";
+        console.log(location.pathname);
+        break;
+
+    case location.pathname == "/billing":
+        document.title = "CineNova - Billing Info"; 
+        console.log(location.pathname);
+        break;
+
+    default:
+        document.title = "CineNova"; 
+        console.log('default title: ' + location.pathname);
+        break;
+  }
   
+  // Handles fade-in of movie sections when user scrolls to them
   useEffect(() => {
 
     // Store styles
@@ -109,6 +135,7 @@ const Header = (props) => {
     };
   }, []);
 
+
   return (
     <header 
       ref={headerRef}
@@ -117,7 +144,7 @@ const Header = (props) => {
     >
     <Link 
       to="/"
-      ref={logoDivRef} 
+      ref={logoDivRef}
       className='flex flex-col justify-center items-center cursor-pointer relative top-4 md:top-0'
     >
       
@@ -131,7 +158,6 @@ const Header = (props) => {
         ref={cinenovaTitleRef}
         className='text-2xl sm:text-[1.65rem] md:text-3xl font-bold text-[#fb4242] hover:text-[#ff5c5c] transition duration-300 ease-in-out'
       >CineNova</span>
-      
     </Link>
     <nav 
       ref={navRef}
@@ -141,10 +167,10 @@ const Header = (props) => {
         className='hidden divide-x-2 divide-[#fb4242] divide-solid gap-[1.1rem] text-[#192734] dark:text-white font-bold sm:text-[1.5rem] lg:text-[1.48rem] lg:ml-4 pl-16 mobile-menu:flex'
       >
         <li>
-          <a href="#nowPlaying" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>Now Playing</a>
+          <Link to="localhost:5173/#nowPlaying" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>Now Playing</Link>
         </li>
         <li className='mt-[0.25] pl-4'>
-          <a href="#upcoming" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>Upcoming</a>
+          <Link to="localhost:5173/#upcoming" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>Upcoming</Link>
         </li>
         <li className='mt-[0.25] pl-4'>
           <Link to="/contact" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>
@@ -155,8 +181,8 @@ const Header = (props) => {
       <button onClick={props.toggleTheme} className='absolute ml-auto mr-5 right-[100px] 2xl:mr-14 mobile-menu:flex mobile-menu:fixed mobile-menu:right-[13.5rem] lg:right-60'>
       { 
         props.darkMode 
-          ? <BsSun className='block text-white text-[2.0rem] mobile:menu:mt-1 gap-2 mobile-menu:text-[2rem] relative top-4 md:top-0' />
-          : <BsMoonStars className='block text-[1.73rem] gap-10 mt-1 lg:text-3xl 2xl:text-[2rem] relative top-4 md:top-0' />
+          ? <BsSun className='block text-white hover:text-[#fb4242] text-[2.0rem] mobile:menu:mt-1 gap-2 mobile-menu:text-[2rem] relative top-4 md:top-0 transition duration-300 ease-in-out' />
+          : <BsMoonStars className='block text-[1.73rem] gap-10 mt-1 lg:text-3xl 2xl:text-[2rem] relative top-4 md:top-0 hover:text-[#fb4242] transition duration-300 ease-in-out' />
       } 
       </button>
       <HamburgerMenu darkMode={props.darkMode} />
@@ -173,7 +199,7 @@ const Header = (props) => {
         <li>
           <div className='md:h-14 md:w-14 lg:h-16 lg:w-16 2xl:h-[4.5rem] 2xl:w-[4.5rem] bg-[#192734] rounded-[50%] flex justify-center items-center z-0 dark:bg-white'>
             <a href="https://facebook.com" target='_blank'>
-              <FaFacebook className='text-white lg:w-11 2xl:w-12 md:w-[2.42rem] h-auto z-10 dark:md:w-[2.75rem] dark:lg:w-[3.2rem] dark:text-[#192734] hover:text-[#ff7474] dark:hover:text-[#fb4242] transition duration-300 ease-in-out' />
+              <FaFacebook className='text-white lg:w-[3rem] 2xl:w-12 md:w-[2.42rem] h-auto z-10 dark:md:w-[2.75rem] dark:lg:w-[3.25rem] dark:text-[#192734] hover:text-[#ff7474] dark:hover:text-[#fb4242] transition duration-300 ease-in-out' />
             </a>
           </div>
         </li>
