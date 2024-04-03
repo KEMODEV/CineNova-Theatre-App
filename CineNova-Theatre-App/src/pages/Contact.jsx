@@ -4,11 +4,14 @@ import { IoMdPin } from "react-icons/io"
 
 const Contact = (props) => {
   return (
-    <main className='size-full pb-20 mt-[10.53rem] xl:mt-[13rem] mobile-menu:mt-[12.53rem]'>
+    <main className='size-full pb-20 mt-[10.53rem] sm:mt-[11.5rem] md:mt-[12.5rem] xl:mt-[13rem] mobile-menu:mt-[12.53rem]'>
       <div className='flex flex-col justify-center items-center'>
         <h1 
           className='text-[#fb4242] text-4xl text-bold'
-          style={ props.darkMode ? { textShadow: "#FFF 1.5px 1.5px" } : { textShadow: "#000 2px 2px" } }
+          style={ props.darkMode 
+                    ? { textShadow: "#FFF 1.5px 1.5px" } 
+                    : { textShadow: "#000 2px 2px" } 
+                }
         >
           Contact
         </h1>
@@ -42,7 +45,6 @@ const Contact = (props) => {
           </div>
         </address>
       </article>
-
     </main>
   )
 }

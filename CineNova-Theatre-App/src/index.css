@@ -29,14 +29,12 @@ html.dark, .dark header, .dark nav {
   background-image: url('./images/bg_patterns/memphis-mini-dark.jpg');
 }
 
-#overlay.overlay-shown {
-  display: block;
-  z-index: 39;
-  background-color: #000000ad;
-}
-
-#overlay.overlay-hidden {
+#overlay {
   display: none;
+  background-color: #00000080;
+  width: 100vw;
+  height: 100vh;
+  z-index: 39;
 }
 
 @media screen and (min-width: 1024px /* lg: */) {

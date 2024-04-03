@@ -1,11 +1,11 @@
 import './index.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import useLocalStorage from 'use-local-storage'
 import Header from './components/Header'
-import HomeBody from './components/HomeBody'
+import Home from './pages/Home'
 import Contact from './pages/Contact'
-import Tickets from './components/Tickets'
+import Tickets from './pages/Tickets'
 import Billing from './pages/Billing'
 
 function App() {
@@ -27,21 +27,21 @@ function App() {
     document.title="CineNova";
   })*/
 
-
   
   return (
     <>
     {/*<Home toggleTheme={toggleTheme} darkMode={darkMode} />*/}
-    <div id='overlay'></div>
+    
     <Router>
       <Header 
         toggleTheme={toggleTheme} 
         darkMode={darkMode} 
       />
       <Routes>
+      
         <Route 
           path="/" 
-          element={<HomeBody darkMode={darkMode} />}
+          element={<Home darkMode={darkMode} />}
         />
         <Route 
           path="/contact" 
@@ -55,8 +55,9 @@ function App() {
           path="/billing" 
           element={<Billing darkMode={darkMode} />} 
         />
+      
       </Routes>
-    </Router>
+    </Router>    
     </>
   )
 }

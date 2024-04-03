@@ -16,27 +16,32 @@ const Header = (props) => {
 
   // Updating the tab title
   const location = useLocation();
-  let title = document.title;
-  switch (true) {
-    case location.pathname == "/contact":
-        document.title = "CineNova - Contact";
-        console.log(location.pathname);
-        break;
+  switch (location.pathname) {
+    case "/contact":
+      document.title = "CineNova - Contact";
+      break;
 
-    case location.pathname == "/tickets":
-        document.title = "CineNova - Tickets & Seating";
-        console.log(location.pathname);
-        break;
+    case "/tickets":
+      document.title = "CineNova - Tickets & Seating";
+      break;
 
-    case location.pathname == "/billing":
-        document.title = "CineNova - Billing Info"; 
-        console.log(location.pathname);
-        break;
+    case "/billing":
+      document.title = "CineNova - Billing Info"; 
+      break;
 
     default:
-        document.title = "CineNova"; 
-        console.log('default title: ' + location.pathname);
-        break;
+      document.title = "CineNova";
+      break;
+  }
+
+  // Scroll to each section
+  const scrollToNP = () => {
+    const nowPlaying = document.getElementById("nowPlaying");
+    nowPlaying.scrollIntoView({ behavior: 'smooth' });
+  }
+  const scrollToUP = () => {
+    const upcoming = document.getElementById("upcoming");
+    upcoming.scrollIntoView({ behavior: 'smooth' });
   }
   
   // Handles fade-in of movie sections when user scrolls to them
@@ -135,6 +140,7 @@ const Header = (props) => {
     };
   }, []);
 
+    
 
   return (
     <header 
@@ -142,7 +148,7 @@ const Header = (props) => {
       className='flex fixed top-[-1.22rem] left-0 right-0 bg-white dark:bg-[#000] shadow-md items-center pb-7 md:py-5 px-6 border-b-[0.45rem] border-[#fb4242] translate-y-0 transform duration-300 ease-in-out z-50'
       style={{ transform: "translateY(20px)" }}
     >
-    <Link 
+    <Link
       to="/"
       ref={logoDivRef}
       className='flex flex-col justify-center items-center cursor-pointer relative top-4 md:top-0'
@@ -167,10 +173,22 @@ const Header = (props) => {
         className='hidden divide-x-2 divide-[#fb4242] divide-solid gap-[1.1rem] text-[#192734] dark:text-white font-bold sm:text-[1.5rem] lg:text-[1.48rem] lg:ml-4 pl-16 mobile-menu:flex'
       >
         <li>
-          <Link to="localhost:5173/#nowPlaying" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>Now Playing</Link>
+          <Link 
+            to="localhost:5173/#nowPlaying" 
+            className='hover:text-[#fb4242] transition duration-300 ease-in-out'
+            onClick={scrollToNP}
+          >
+            Now Playing
+          </Link>
         </li>
         <li className='mt-[0.25] pl-4'>
-          <Link to="localhost:5173/#upcoming" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>Upcoming</Link>
+          <Link 
+            to="localhost:5173/#upcoming" 
+            className='hover:text-[#fb4242] transition duration-300 ease-in-out'
+            onClick={scrollToUP}
+          >
+            Upcoming
+          </Link>
         </li>
         <li className='mt-[0.25] pl-4'>
           <Link to="/contact" className='hover:text-[#fb4242] transition duration-300 ease-in-out'>
@@ -185,28 +203,29 @@ const Header = (props) => {
           : <BsMoonStars className='block text-[1.73rem] gap-10 mt-1 lg:text-3xl 2xl:text-[2rem] relative top-4 md:top-0 hover:text-[#fb4242] transition duration-300 ease-in-out' />
       } 
       </button>
-      <HamburgerMenu darkMode={props.darkMode} />
+
+      <HamburgerMenu darkMode={props.darkMode} scrollToNP={scrollToNP} scrollToUP={scrollToUP} />
     </nav>
     <div className='hidden justify-between items-end w-[100%] mobile-menu:flex'>
       <ul className='flex fixed justify-end gap-3 ml-auto top-12 md:top-[3.3rem] lg:top-12 2xl:top-[2.8rem] right-5'>
         <li>
           <div className='md:h-14 md:w-14 lg:h-16 lg:w-16 2xl:h-[4.5rem] 2xl:w-[4.5rem] bg-[#192734] rounded-[50%] flex justify-center items-center z-0 dark:bg-white'>
             <a href="https://instagram.com" target='_blank'>
-              <FaInstagram className='text-white lg:w-11 2xl:w-12 md:w-[2.4rem] h-auto z-10 dark:md:w-[2.6rem] dark:lg:w-12 dark:2xl:w-14 dark:text-[#192734] hover:text-[#ff7474] dark:hover:text-[#fb4242] transition duration-300 ease-in-out' />
+              <FaInstagram className='text-white lg:w-11 2xl:w-12 md:w-[2.4rem] h-auto z-10 dark:md:w-[2.6rem] dark:lg:w-12 dark:2xl:w-14 dark:text-[#192734] hover:text-[#fb4242] dark:hover:text-[#fb4242] transition duration-300 ease-in-out' />
             </a>
           </div>
         </li>
         <li>
           <div className='md:h-14 md:w-14 lg:h-16 lg:w-16 2xl:h-[4.5rem] 2xl:w-[4.5rem] bg-[#192734] rounded-[50%] flex justify-center items-center z-0 dark:bg-white'>
             <a href="https://facebook.com" target='_blank'>
-              <FaFacebook className='text-white lg:w-[3rem] 2xl:w-12 md:w-[2.42rem] h-auto z-10 dark:md:w-[2.75rem] dark:lg:w-[3.25rem] dark:text-[#192734] hover:text-[#ff7474] dark:hover:text-[#fb4242] transition duration-300 ease-in-out' />
+              <FaFacebook className='text-white md:w-[2.42rem] lg:w-[3rem] 2xl:w-14 h-auto z-10 dark:md:w-[2.75rem] dark:lg:w-[3.25rem] dark:2xl:w-[3.75rem] dark:text-[#192734] hover:text-[#fb4242] dark:hover:text-[#fb4242]  transition duration-300 ease-in-out' />
             </a>
           </div>
         </li>
         <li>
           <div className='md:h-14 md:w-14 lg:h-16 lg:w-16 2xl:h-[4.5rem] 2xl:w-[4.5rem] bg-[#192734] rounded-[50%] flex justify-center items-center z-0 dark:bg-white'>
             <a href="https://twitter.com" target='_blank'>
-              <FaTwitter className='text-white lg:w-11 2xl:w-12 md:w-9 h-auto z-10 dark:md:w-[2.6rem] dark:lg:w-12 dark:text-[#192734] hover:text-[#ff7474] dark:hover:text-[#fb4242] transition duration-300 ease-in-out' />
+              <FaTwitter className='text-white lg:w-11 2xl:w-12 md:w-9 h-auto z-10 dark:md:w-[2.6rem] dark:lg:w-12 dark:2xl:w-[3.25rem] dark:text-[#192734] hover:text-[#fb4242] dark:hover:text-[#fb4242]  transition duration-300 ease-in-out' />
             </a>
           </div>
         </li>

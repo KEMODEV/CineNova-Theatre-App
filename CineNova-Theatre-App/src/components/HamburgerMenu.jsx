@@ -7,6 +7,15 @@ const HamburgerMenu = (props) => {
     
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
+  /*const scrollToNP = () => {
+    const nowPlaying = document.getElementById("nowPlaying");
+    nowPlaying.scrollIntoView({ behavior: 'smooth' });
+  }
+  const scrollToUP = () => {
+    const upcoming = document.getElementById("upcoming");
+    upcoming.scrollIntoView({ behavior: 'smooth' });
+  }*/
+
   return (
     <>
         {isMenuVisible ? (
@@ -14,14 +23,14 @@ const HamburgerMenu = (props) => {
             <button
                 className="flex text-5xl text-white items-center cursor-pointer fixed right-10 top-6 z-50 mobile-menu:hidden hover:text-[#192734] dark:hover:text-[#fb4242] transition duration-300 ease-in-out"
                 onClick={() => setIsMenuVisible(!isMenuVisible)}
-                >
+            >
                 &times;
             </button>
             </>
         ) : (
             <svg
                 onClick={() => setIsMenuVisible(!isMenuVisible)}
-                className="fixed top-[2.8rem] md:top-[3.7rem] z-30 flex items-center cursor-pointer text-[#192734] right-10 mt-1 mobile-menu:hidden"
+                className="fixed top-[2.8rem] sm:top-[3.05rem] md:top-[3.7rem] z-30 flex items-center cursor-pointer text-[#192734] right-10 mt-1 mobile-menu:hidden"
                 viewBox="0 0 100 80"
                 fill={props.darkMode ? "#FFF" : "#192734"}
                 width="40"
@@ -34,20 +43,33 @@ const HamburgerMenu = (props) => {
         )}
         
         <nav
-            className={`flex flex-col justify-center items-center top-0 right-0 w-[48vw] h-[595%] sm:h-[580%] bg-[#fb4242] dark:bg-[#000] p-10 pl-20 text-white fixed z-40 ease-in-out duration-300 mobile-menu:hidden md:w-[40vw] ${isMenuVisible ? "translate-x-0 " : "translate-x-full"}`}
-            
+            className={`flex flex-col justify-center items-center top-0 right-0 w-[55vw] sm:w-[48vw] bg-[#fb4242] dark:bg-[#000] p-10 pl-20 text-white fixed z-40 ease-in-out duration-300 mobile-menu:hidden ${isMenuVisible ? "translate-x-0 " : "translate-x-full"}`}
+            style={{ height: "100vh" }}
         >
             <ul className='flex flex-col justify-center items-center w-[100%] mt-[-5rem] mr-[2.0rem] divide-y-2 divide-white dark:divide-[#fb4242] text-[#192734] space-y-10 text-[1.4rem] sm:text-[1.55rem] md:text-[1.65rem] font-bold dark:text-white'>
                 <li className='mb-[-0.3rem] mobile-menu:hidden'>
-                    <Link to="/" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>
+                    <Link 
+                        to="/" 
+                        className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'
+                    >
                         <span>Home</span>
                     </Link>
                 </li>
-                <li className='mb-[-0.1rem] pt-8 sm:pt-9 sm:pb-1 mobile-menu:hidden'>
-                    <a href="#nowPlaying" className='text-center hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>Now Playing</a>
+                <li className='mb-[-0.1rem] pt-8 sm:pt-9 sm:pb-1 mobile-menu:hidden text-center'>
+                    <Link 
+                        to="localhost:5173/#nowPlaying" 
+                        className='text-center hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'
+                    >
+                        Now Playing
+                    </Link>
                 </li>
                 <li className='pt-8 mobile-menu:hidden'>
-                    <a href="#upcoming" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>Upcoming</a>
+                    <Link 
+                        to="localhost:5173/#upcoming"  
+                        className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'
+                    >
+                        Upcoming
+                    </Link>
                 </li>
                 <li className='pt-7 mobile-menu:hidden'>
                     <Link to="/contact" className='hover:text-white dark:hover:text-[#fb4242] transition duration-300 ease-in-out'>
