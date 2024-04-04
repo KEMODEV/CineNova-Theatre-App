@@ -3,26 +3,62 @@ import '../Tickets.css'
 
 const Tickets = (props) => {
 
-  let [value, setValue] = useState(0);
-  //let value = 0;
+  let value = 0;
 
-  let childTicketCount;
-  let adultTicketCount;
-  let seniorTicketCount;
+  let [childTicketCount, setChildTicketCount] = useState(0);
+  let [adultTicketCount, setAdultTicketCount] = useState(0);
+  let [seniorTicketCount, setSeniorTicketCount] = useState(0);
 
-  const handlePlus = () => {
-    setValue(value+=1);
-    console.log(value);
+  function handleOperator(elem) {
+    if (elem.target.className.includes("plus-btn")) {
+      if (childTicketCount !== 10 && adultTicketCount !== 10 && seniorTicketCount !== 10) {
+        switch(true) {
+          case elem.target.className.includes('child-ticket'):
+            setChildTicketCount(childTicketCount += 1);
+            break;
+          case elem.target.className.includes('adult-ticket'):
+            setAdultTicketCount(adultTicketCount += 1);
+            break;
+          case elem.target.className.includes('senior-ticket'):
+            setSeniorTicketCount(seniorTicketCount += 1);
+            break;
+          default:
+            console.log("plus button error");
+        }
+      }
+    } else if (elem.target.className.includes("minus-btn")) {
+      if (childTicketCount !== 0 || adultTicketCount !== 0 || seniorTicketCount !== 0) {
+        console.log(elem.target.className.includes("minus-btn"));
+        switch(true) {
+          case elem.target.className.includes('child-ticket'):
+            setChildTicketCount(childTicketCount -= 1);
+            break;
+          case elem.target.className.includes('adult-ticket'):
+            setAdultTicketCount(adultTicketCount -= 1);
+            break;
+          case elem.target.className.includes('senior-ticket'):
+            setSeniorTicketCount(seniorTicketCount -= 1);
+            break;
+          default:
+            console.log("minus button error");
+        }
+      }
+    } else {
+      console.log("button classes error")
+    }
   }
-  const handleMinus = () => {
-    setValue(value-=1);
-    console.log(value);
+
+  /*const handlePlus = (elem) => {
+    value+=1;
+    console.log(elem.target.className);
   }
+  const handleMinus = (elem) => {
+    value-=1;
+    console.log(elem.target.className.includes("minus-btn"));
+  }*/
   const handleChange = (event) => {
-    setValue(Number(event.target.value));
+    Number(event.target.value);
   }
-
-  console.log(localStorage.getItem("movieImg"));
 
   return (
     <main className='size-full pb-20 mt-[10.53rem] sm:mt-[11.5rem] md:mt-[12.5rem] xl:mt-[13rem] mobile-menu:mt-[12.53rem]'>
@@ -49,50 +85,94 @@ const Tickets = (props) => {
           />
         </div>
 
-        <div>
+        <section>
+
+          {/* Child tickets */}
+          <p className='text-[#192734] dark:text-white text-2xl font-semibold'>Child {'('}0-12yo{')'}</p>
           <div className='wrapper'>
-            <button className="plus-minus" onClick={handleMinus}>-</button>
+            <button
+              className="plus-minus minus-btn child-ticket" 
+              onClick={handleOperator}
+            >
+              -
+            </button>
             <input 
               type="number" 
               className="ticket-count" 
-              onChange={handleChange} 
-              value={value} 
+              onChange={handleChange}
+              value={childTicketCount} 
             />
-            <button className="plus-minus" onClick={handlePlus}>+</button>
+            <button 
+              className="plus-minus plus-btn child-ticket" 
+              onClick={handleOperator}
+            >
+              +
+            </button>
           </div>
 
+          
+          {/* Adult tickets */}
+          <p className='text-[#192734] dark:text-white text-2xl font-semibold'>General {'('}13-59yo{')'}</p>
           <div className='wrapper'>
-            <button className="plus-minus" onClick={handleMinus}>-</button>
+            <button 
+              className="plus-minus minus-btn adult-ticket" 
+              onClick={handleOperator}
+            >
+              -
+            </button>
             <input 
               type="number" 
               className="ticket-count" 
               onChange={handleChange} 
-              value={value} 
+              value={adultTicketCount} 
             />
-            <button className="plus-minus" onClick={handlePlus}>+</button>
+            <button 
+              className="plus-minus plus-btn adult-ticket" 
+              onClick={handleOperator}
+            >
+              +
+            </button>
           </div>
           
+
+          {/* Senior tickets */}
+          <p className='text-[#192734] dark:text-white text-2xl font-semibold'>Senior {'('}60yo-{')'}</p>
           <div className='wrapper'>
-            <button className="plus-minus" onClick={handleMinus}>-</button>
+            <button 
+              className="plus-minus minus-btn senior-ticket" 
+              onClick={handleOperator}
+            >
+              -
+            </button>
             <input 
               type="number" 
               className="ticket-count" 
               onChange={handleChange} 
-              value={value} 
+              value={seniorTicketCount} 
             />
-            <button className="plus-minus" onClick={handlePlus}>+</button>
+            <button 
+              className="plus-minus plus-btn senior-ticket" 
+              onClick={handleOperator}
+            >
+              +
+            </button>
           </div>
-        </div>
+        </section>
 
-        <div className=''>
+        <section className=''>
           <h2 className='m-3 dark:text-white text-3xl font-semibold'>
             {localStorage.getItem("movieTitle")}
           </h2>
-        </div>
+        </section>
 
-        <div>
-          <button className='reserve-seats'>Reserve Seats</button>
-        </div>
+        <section>
+          <button 
+            type='submit' 
+            className='reserve-seats cursor-default'
+          >
+            Reserve Seats
+          </button>
+        </section>
 
       </article>
     </main>
