@@ -53,14 +53,15 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 30px;
 }
 
-.reserve-seats {
+#reserve-seats {
     color: #FFF;
-    background-color: #6c757de1;
+    background: #6c757de1;
     padding: 1rem 3rem;
     margin-top: 5rem;
     font-size: 1.5rem;
     font-weight: 700;
     border-radius: 15px;
+    transition: transform 1s ease-in-out;
 }
 
 @media screen and (min-width: 1024px /* lg: */) {
