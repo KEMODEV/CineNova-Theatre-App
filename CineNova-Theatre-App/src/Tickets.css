@@ -53,10 +53,10 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 30px;
 }
 
-#reserve-seats {
+#reserveSeatsBtn {
     color: #FFF;
-    background: #6c757de1;
-    padding: 1rem 3rem;
+    background-color: #6c757de1;
+    padding: 1.25rem 4rem;
     margin-top: 5rem;
     font-size: 1.5rem;
     font-weight: 700;
@@ -64,8 +64,39 @@ input[type=number]::-webkit-outer-spin-button {
     transition: transform 1s ease-in-out;
 }
 
-@media screen and (min-width: 1024px /* lg: */) {
-    .reserve-seats {
-        margin-top: 0rem;
+.popup-overlay {
+    background: rgba(0,0,0,.75);
+}
+
+.popup-content {
+    width: 100% !important;
+    max-width: 1000px;
+    height: 80%;
+    border: none !important;
+}
+
+.seats {
+    color: #000;
+    background-color: #2ee14099;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+}
+
+.seats:hover {
+    background-color: #2ee13f;
+}
+
+.seats-selected {
+    background-color: #0fb6f4; /* #FB9F42 */
+}
+
+.seat-taken {
+    background-color: #fb4242 !important;
+}
+
+@media only screen and (min-width: 930px) {
+    .popup-content {
+        width: 85% !important;
     }
 }

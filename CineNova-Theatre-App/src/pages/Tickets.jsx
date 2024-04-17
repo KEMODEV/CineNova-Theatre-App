@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../Tickets.css'
+import SeatSelectChart from '../components/seatSelectChart';
 
 const Tickets = (props) => {
 
@@ -8,7 +9,8 @@ const Tickets = (props) => {
   let [generalTicketCount, setGeneralTicketCount] = useState(0);
   let [seniorTicketCount, setSeniorTicketCount] = useState(0);
   let [totalTicketCount, setTotalTicketCount] = useState(0);
-  useEffect(() => {
+  let [isTicketsSelected, setIsTicketSelected] = useState(false);
+  /*useEffect(() => {
     const reserveBtn = document.querySelector('#reserve-seats');
     console.log(reserveBtn);
     if (childTicketCount > 0 || generalTicketCount > 0 || seniorTicketCount > 0) {
@@ -18,47 +20,52 @@ const Tickets = (props) => {
       reserveBtn.style.background = "#6c757de1";
       reserveBtn.style.cursor = "default";
     }
-  })
+  })*/
   
 
   function handleOperator(elem) {
     if (elem.target.className.includes("plus-btn")) {
-      if (childTicketCount !== 10 && generalTicketCount !== 10 && seniorTicketCount !== 10) {
-        switch(true) {
-          case elem.target.className.includes('child-ticket'):
-            setChildTicketCount(childTicketCount += 1);
-            break;
-          case elem.target.className.includes('general-ticket'):
-            setGeneralTicketCount(generalTicketCount += 1);
-            break;
-          case elem.target.className.includes('senior-ticket'):
-            setSeniorTicketCount(seniorTicketCount += 1);
-            break;
-          default:
-            console.log("plus button error");
-        }
+      switch(true) {
+        case elem.target.className.includes('child-ticket') && childTicketCount !== 10:
+          setChildTicketCount(childTicketCount += 1);
+          break;
+        case elem.target.className.includes('general-ticket') && generalTicketCount !== 10:
+          setGeneralTicketCount(generalTicketCount += 1);
+          break;
+        case elem.target.className.includes('senior-ticket')  && seniorTicketCount !== 10:
+          setSeniorTicketCount(seniorTicketCount += 1);
+          break;
+        default:
+          console.log("plus button error");
       }
     } else if (elem.target.className.includes("minus-btn")) {
-      if (childTicketCount !== 0 || generalTicketCount !== 0 || seniorTicketCount !== 0) {
-        switch(true) {
-          case elem.target.className.includes('child-ticket'):
-            setChildTicketCount(childTicketCount -= 1);
-            break;
-          case elem.target.className.includes('general-ticket'):
-            setGeneralTicketCount(generalTicketCount -= 1);
-            break;
-          case elem.target.className.includes('senior-ticket'):
-            setSeniorTicketCount(seniorTicketCount -= 1);
-            break;
-          default:
-            console.log("minus button error");
-        }
+      switch(true) {
+        case elem.target.className.includes('child-ticket') && childTicketCount !== 0:
+          setChildTicketCount(childTicketCount -= 1);
+          break;
+        case elem.target.className.includes('general-ticket') && generalTicketCount !== 0:
+          setGeneralTicketCount(generalTicketCount -= 1);
+          break;
+        case elem.target.className.includes('senior-ticket') && seniorTicketCount !== 0:
+          setSeniorTicketCount(seniorTicketCount -= 1);
+          break;
+        default:
+          console.log("minus button error");
       }
     } else {
       console.log("button classes error");
     }
+
+    if (childTicketCount > 0 || generalTicketCount > 0 || seniorTicketCount > 0) {
+      setIsTicketSelected(isTicketsSelected = true);
+      console.log('yay tickets :)');
+    } else {
+      setIsTicketSelected(isTicketsSelected = false); 
+      console.log('no tickets :(');
+    }
+
+
     setTotalTicketCount(totalTicketCount = childTicketCount + generalTicketCount + seniorTicketCount);
-    
   }
 
   const handleChange = (event) => {
@@ -91,7 +98,7 @@ const Tickets = (props) => {
         >
           <img
             src={`${localStorage.getItem("movieImg")}`} 
-            className='w-full h-full border-2 border-gray-100'
+            className='w-full h-full border-2 border-gray-800 dark:border-gray-100'
           />
           <h1 className='m-3 dark:text-white text-4xl font-bold text-center'>
             {localStorage.getItem("movieTitle")}
@@ -101,7 +108,7 @@ const Tickets = (props) => {
         <section className='mt-12 sm:mt-0'>
 
           {/* Child tickets */}
-          <p className='text-[#192734] dark:text-white text-2xl font-semibold'>Child {'('}0-12yo{')'}</p>
+          <label className='text-[#192734] dark:text-white text-2xl font-semibold'>Child {'('}0-12yo{')'}</label>
           <div className='wrapper'>
             <button
               className="plus-minus minus-btn child-ticket" 
@@ -109,11 +116,16 @@ const Tickets = (props) => {
             >
               -
             </button>
-            <input 
+            <input
               type="number" 
               className="ticket-count"
               onChange={handleChange}
-              value={childTicketCount} 
+              value={childTicketCount}
+              disabled 
+              style={props.darkMode 
+                      ? { backgroundColor: "#FFF" }
+                      : { backgroundColor: "#FFFFFF00" }
+                    }
             />
             <button 
               className="plus-minus plus-btn child-ticket" 
@@ -126,7 +138,7 @@ const Tickets = (props) => {
           
 
           {/* General tickets */}
-          <p className='text-[#192734] dark:text-white text-2xl font-semibold'>General {'('}13-59yo{')'}</p>
+          <label className='text-[#192734] dark:text-white text-2xl font-semibold'>General {'('}13-59yo{')'}</label>
           <div className='wrapper'>
             <button 
               className="plus-minus minus-btn general-ticket" 
@@ -139,6 +151,8 @@ const Tickets = (props) => {
               className="ticket-count" 
               onChange={handleChange}
               value={generalTicketCount} 
+              disabled 
+              style={{ backgroundColor: "#FFF" }}
             />
             <button 
               className="plus-minus plus-btn general-ticket" 
@@ -151,7 +165,7 @@ const Tickets = (props) => {
 
 
           {/* Senior tickets */}
-          <p className='text-[#192734] dark:text-white text-2xl font-semibold'>Senior {'('}60yo-{')'}</p>
+          <label className='text-[#192734] dark:text-white text-2xl font-semibold'>Senior {'('}60yo-{')'}</label>
           <div className='wrapper'>
             <button 
               className="plus-minus minus-btn senior-ticket" 
@@ -164,6 +178,8 @@ const Tickets = (props) => {
               className="ticket-count" 
               onChange={handleChange}
               value={seniorTicketCount} 
+              disabled 
+              style={{ backgroundColor: "#FFF" }}
             />
             <button 
               className="plus-minus plus-btn senior-ticket" 
@@ -175,15 +191,7 @@ const Tickets = (props) => {
           <aside className='relative top-[-2.5rem] text-md font-semibold text-[#333333be] dark:text-[#b3b3b3]'>$5.99 per ticket</aside>
         </section>
         
-        <section className='relative top-[-5rem] lg:top-[-4rem] sm:col-span-2'>
-          <button 
-            type='submit' 
-            id='reserve-seats'
-            className='cursor-default transition duration-500 ease-in-out'
-          >
-            Reserve Seats
-          </button>
-        </section>
+        <SeatSelectChart childTicketCount={childTicketCount} generalTicketCount={generalTicketCount} seniorTicketCount={seniorTicketCount} isTicketsSelected={isTicketsSelected} setIsTicketSelected={setIsTicketSelected} />
 
       </article>
     </main>

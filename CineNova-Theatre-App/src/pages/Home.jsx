@@ -66,10 +66,8 @@ const Home = (props) => {
         percentPosition: false,
       });
       
-      const carouselCells = elem.querySelectorAll('.carousel-cell');
-      const nowPlayingCells = elem.querySelectorAll('.now-playing');
-      const imgs = elem.querySelectorAll('.carousel-cell img');
-      
+      const carouselCells = elem.querySelectorAll('.carousel-cell'); // The div holding the movie image and title
+      const nowPlayingCells = elem.querySelectorAll('.now-playing'); // All carousel cells in now playing section      
 
       // Neon border for centered poster
       // const neonYellowBorder = "carousel-cell w-32 h-auto dark:border-4 rounded-[6px] dark:border-[#ffff0000] dark:border-[#ffff00] dark:shadow-[0_0_1px_#fff,inset_0_0_1px_#fff,0_0_3px_#FFFF00,0_0_8px_#FFFF00,0_0_14px_#FFFF00] drop-shadow-[0_10px_10px_rgba(255,255,0,0.5)] transition duration-500 ease-in-out";
@@ -80,56 +78,31 @@ const Home = (props) => {
         flkty.slides.forEach((slide, i) => {
           const carouselCell = carouselCells[i];
           const nowPlayingCell = nowPlayingCells[i];
-          const img = imgs[i];
-          //const cellLink = cellLinks[i];
           
-          
-
           // Check if the slide is before or after the centered slide
           if (i <= centerSlideIndex - 1 || i >= centerSlideIndex + 1) {
             carouselCell.style.opacity = '0.5';
-            /*carouselCell.addEventListener("mouseover", () => { 
-              carouselCell.style.transform = "scale(1.1)";
-            });
-            carouselCell.addEventListener("mouseout", () => { 
-              carouselCell.style.transform = "scale(1)";
-            });*/
-            img.style.cursor = 'grab';
+            nowPlayingCell.style.cursor = 'default';
+            nowPlayingCell.removeEventListener('click', selectMovie); // removes the ability to be selected
             
-            //cellLink.href = "/";
             //carouselCell.className = prevCellClassName;
-            carouselCell.removeEventListener('click', selectMovie);
+            
           } else {
             carouselCell.style.opacity = '1'; 
-            img.style.cursor = 'pointer';
-            //console.log('href: '+nowPlayingMovie.href);
-  
-            //cellLink.href = "/tickets";
-            //carouselCell.className = neonYellowBorder;
+            nowPlayingCell.style.cursor = 'pointer';
 
-            carouselCell.addEventListener('click', selectMovie);
+            nowPlayingCell.addEventListener('click', selectMovie); // allows for selecting movies
+
+            //carouselCell.className = neonYellowBorder;            
           
           }
           return () => {
-            carouselCell.removeEventListener('click', selectMovie);
+            nowPlayingCell.removeEventListener('click', selectMovie);
           }
         });
       });
     });
   }, [selectMovie]);
-
-  /*useEffect(() => {
-    const movies = document.querySelectorAll("#nowPlaying img");
-
-    const selectMovie = (e) => {
-      console.log(e.target.src);
-    }
-
-    for (let movie of movies) {
-      movie.addEventListener('click', selectMovie);
-    }
-
-  }, [])*/
   
 
   return (
