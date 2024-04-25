@@ -70,25 +70,27 @@ input[type=number]::-webkit-outer-spin-button {
 
 .popup-content {
     width: 100% !important;
-    max-width: 1000px;
-    height: 80%;
+    max-width: 800px;
+    height: 70%;
     border: none !important;
+    border-radius: 10px;
 }
 
 .seats {
     color: #000;
-    background-color: #2ee14099;
+    background-color: #5a5a5a71;
+    margin: auto 0.25rem;
     width: 2rem;
     height: 2rem;
     border-radius: 4px;
 }
 
 .seats:hover {
-    background-color: #2ee13f;
+    background-color: #2ee1407e;
 }
 
 .seats-selected {
-    background-color: #0fb6f4; /* #FB9F42 */
+    background-color: #2ee13f;
 }
 
 .seat-taken {

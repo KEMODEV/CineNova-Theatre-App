@@ -25,10 +25,15 @@
     cursor: default;
 }
 
+.flickity-viewport {
+    cursor: default !important;
+}
+
 .carousel-cell {
     margin-right: 20px;
     overflow: hidden;
     width: auto;
+    max-width: 230px;
     height: auto;
     cursor: default;
     transition: 50ms ease-in-out;
@@ -36,7 +41,7 @@
   
 .carousel-cell img {
     display: block;
-    max-width: 700px;
+    max-width: 230px;
     height: 250px;
     border-radius: 10px 10px 0 0;
     z-index: 4;
@@ -143,7 +148,12 @@ background-color: rgba(255, 255, 255, 1.0);
 } */
 
 @media screen and (min-width: 1536px /* 2xl */) {
+    .carousel-cell {
+        max-width: 270px;
+    }
+    
     .carousel-cell img {
+        max-width: 270px;
         height: 400px;
     }
 

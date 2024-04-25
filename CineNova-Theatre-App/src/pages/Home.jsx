@@ -66,8 +66,9 @@ const Home = (props) => {
         percentPosition: false,
       });
       
-      const carouselCells = elem.querySelectorAll('.carousel-cell'); // The div holding the movie image and title
-      const nowPlayingCells = elem.querySelectorAll('.now-playing'); // All carousel cells in now playing section      
+      const carouselCells = elem.querySelectorAll('.carousel-cell');
+      const nowPlayingCells = elem.querySelectorAll('.now-playing');
+      const imgs = elem.querySelectorAll('.carousel-cell img');    
 
       // Neon border for centered poster
       // const neonYellowBorder = "carousel-cell w-32 h-auto dark:border-4 rounded-[6px] dark:border-[#ffff0000] dark:border-[#ffff00] dark:shadow-[0_0_1px_#fff,inset_0_0_1px_#fff,0_0_3px_#FFFF00,0_0_8px_#FFFF00,0_0_14px_#FFFF00] drop-shadow-[0_10px_10px_rgba(255,255,0,0.5)] transition duration-500 ease-in-out";
@@ -78,21 +79,25 @@ const Home = (props) => {
         flkty.slides.forEach((slide, i) => {
           const carouselCell = carouselCells[i];
           const nowPlayingCell = nowPlayingCells[i];
+          const img = imgs[i];
           
           // Check if the slide is before or after the centered slide
           if (i <= centerSlideIndex - 1 || i >= centerSlideIndex + 1) {
             carouselCell.style.opacity = '0.5';
-            nowPlayingCell.style.cursor = 'default';
-            nowPlayingCell.removeEventListener('click', selectMovie); // removes the ability to be selected
-            
+            carouselCell.style.cursor = 'default';
+
+            if (nowPlayingCell !== undefined) {
+              nowPlayingCell.removeEventListener('click', selectMovie); // removes the ability to be selected
+            }
             //carouselCell.className = prevCellClassName;
             
           } else {
             carouselCell.style.opacity = '1'; 
-            nowPlayingCell.style.cursor = 'pointer';
 
-            nowPlayingCell.addEventListener('click', selectMovie); // allows for selecting movies
-
+            if (nowPlayingCell !== undefined) {
+              nowPlayingCell.style.cursor = 'pointer';
+              nowPlayingCell.addEventListener('click', selectMovie); // allows for selecting movies
+            }
             //carouselCell.className = neonYellowBorder;            
           
           }
@@ -137,7 +142,7 @@ const Home = (props) => {
       {/* Now Playing Movies */}
       <article 
         ref={setMovieSectionsRef}
-        className='movie-section flex flex-col justify-center items-center max-w-[1200px] mt-12 mx-5 mobile-menu:mx-20 pt-7 bg-[#fb424200]  border-0 dark:border-4 border-[#ff5b5ba9] dark:border-[#ffe0e0] rounded-xl dark:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_10px_#fb4242,0_0_20px_#fb4242,0_0_40px_#fb4242]'
+        className='movie-section flex flex-col justify-center items-center max-w-[1200px] mt-12 mx-5 mobile-menu:mx-20 xl:mx-auto pt-7 bg-[#fb424200]  border-0 dark:border-4 border-[#ff5b5ba9] dark:border-[#ffe0e0] rounded-xl dark:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_10px_#fb4242,0_0_20px_#fb4242,0_0_40px_#fb4242]'
       >
         <h1 
           className='text-[#fb4242] text-4xl text-bold'
@@ -153,54 +158,37 @@ const Home = (props) => {
         <section 
           className="main-carousel"
         >
-          <div className="carousel-cell">
-            <Link 
-              to=''
-              className='now-playing max-w-[700px]' 
-            >
-              <img 
-                src='src/images/posters/now_playing/dracula_movie_poster.jpg' 
-                alt='Dracula'
-                className='w-auto h-auto'
-              />
-              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Dracula</p>
-            </Link>
+          <div className="carousel-cell now-playing">
+            <img 
+              src='src/images/posters/now_playing/dracula_movie_poster.jpg' 
+              alt='Dracula'
+              className='w-auto h-auto'
+            />
+            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Dracula</p>
           </div>
-          <div className="carousel-cell">
-            <Link 
-              className='now-playing' 
-            >
-              <img 
-                src="src/images/posters/now_playing/mummy_poster.jpg"
-                alt='The Mummy'
-                className='w-full h-auto'
-              />
-              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Mummy</p>
-            </Link>
+          <div className="carousel-cell now-playing">
+            <img 
+              src="src/images/posters/now_playing/mummy_poster.jpg"
+              alt='The Mummy'
+              className='w-full h-auto'
+            />
+            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Mummy</p>
           </div>
-          <div className="carousel-cell">
-            <Link 
-              className='now-playing' 
-            >
-              <img 
-                src="src/images/posters/now_playing/frankenstein_poster.jpg"
-                alt='Frankenstein'
-                className='w-full h-auto'
-              />
-              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Frankenstein</p>
-            </Link>
+          <div className="carousel-cell now-playing">
+            <img
+              src="src/images/posters/now_playing/frankenstein_poster.jpg"
+              alt='Frankenstein'
+              className='w-full h-auto'
+            />
+            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Frankenstein</p>
           </div>
-          <div className="carousel-cell">
-            <Link 
-              className='now-playing' 
-            >
-              <img 
-                src="src/images/posters/now_playing/invisible_man_poster.jpg"
-                alt='The Invisible Man'
-                className='w-full h-auto'
-              />
-              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Invisible Man</p>
-            </Link>
+          <div className="carousel-cell now-playing">
+            <img 
+              src="src/images/posters/now_playing/invisible_man_poster.jpg"
+              alt='The Invisible Man'
+              className='w-full h-auto'
+            />
+            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Invisible Man</p>
           </div>
         </section>
       </article>
@@ -209,7 +197,7 @@ const Home = (props) => {
       <article 
         id='upcoming'
         ref={setMovieSectionsRef}
-        className='movie-section flex flex-col justify-center items-center max-w-[1200px] mt-12 mx-5 mobile-menu:mx-20 pt-7 bg-[#fb424200]  border-0 dark:border-4 border-[#9e42fb67] dark:border-[#eddbff] rounded-xl dark:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_10px_#9F42FB,0_0_20px_#9F42FB,0_0_40px_#9F42FB]'
+        className='movie-section flex flex-col justify-center items-center max-w-[1200px] mt-12 mx-5 mobile-menu:mx-20 xl:mx-auto pt-7 bg-[#fb424200] border-0 dark:border-4 border-[#9e42fb67] dark:border-[#eddbff] rounded-xl dark:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_10px_#9F42FB,0_0_20px_#9F42FB,0_0_40px_#9F42FB]'
       >
         <h1 
           className='text-[#9F42FB] text-4xl text-bold'
@@ -225,25 +213,21 @@ const Home = (props) => {
         <section 
           className="main-carousel"
         >
-          <div className="carousel-cell">
-            <Link to='/'>
-              <img 
-                src='src/images/posters/upcoming/swamp_man_poster.jpg' 
-                alt='Creature From The Black Lagoon'
-                className='w-full h-auto'
-              />
-              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Creature From The Black Lagoon</p>
-            </Link>
+          <div className="carousel-cell max-w-[232px]">
+            <img 
+              src='src/images/posters/upcoming/swamp_man_poster.jpg' 
+              alt='Creature From The Black Lagoon'
+              className='w-full h-auto max-w-[232px]'
+            />
+            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Creature From The Black Lagoon</p>
           </div>
-          <div className="carousel-cell">
-            <Link to='/'>
-              <img 
-                src='src/images/posters/upcoming/invisible_man_returns_poster.jpg'
-                alt='The Invisible Man Returns'
-                className='w-full h-auto'
-              />
-              <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3 text-balance'>The Invisible Man Returns</p>
-            </Link>
+          <div className="carousel-cell max-w-[232px]">
+            <img 
+              src='src/images/posters/upcoming/invisible_man_returns_poster.jpg'
+              alt='The Invisible Man Returns'
+              className='w-full h-auto max-w-[232px]'
+            />
+            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3 text-balance'>The Invisible Man Returns</p>
           </div>
         </section>
       </article>        

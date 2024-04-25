@@ -64,7 +64,6 @@ const Tickets = (props) => {
       console.log('no tickets :(');
     }
 
-
     setTotalTicketCount(totalTicketCount = childTicketCount + generalTicketCount + seniorTicketCount);
   }
 
