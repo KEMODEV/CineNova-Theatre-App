@@ -26,7 +26,7 @@ const SeatSelectChart = (props) => {
       reserveBtn.style.cursor = "pointer";
       //reserveBtn.addEventListener('click', () => setIsSeatsVisible(!isSeatsVisible));
     } else {
-      reserveBtn.style.background = "#6c757de1";
+      reserveBtn.style.background = "#6c757dab";
       reserveBtn.style.cursor = "default";
     }
 
@@ -60,8 +60,260 @@ const SeatSelectChart = (props) => {
     modal nested>
       {
         close => (
-          /* Seat select chart */
-          <section id='seatChart' className={`modal bg-white h-full`}>
+        <section className='theater-container'>
+          <ul className="tableOfContents">
+            <li>
+              <div className="seat"></div>
+              <span>Open</span>
+            </li>
+            <li>
+              <div className="seat selected"></div>
+              <span>Selected</span>
+            </li>
+            <li>
+              <div className="seat occupied"></div>
+              <span>Occupied</span>
+            </li>
+          </ul>
+
+          
+          <div className="theater">
+            <div className="screen">
+              <span>SCREEN</span>
+            </div>
+            <div className='front-rows'>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+
+            </div>
+
+            <div className='back-rows'>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+              <div className="row">
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+                <div className="seat"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className='flex flex-col items-center relative mobile-menu:bottom-3'>
+            <button 
+              type='submit' 
+              id='goToCheckoutBtn'
+              className='cursor-default transition duration-500 ease-in-out'
+            >
+              Checkout
+            </button>
+            <span className='relative top-3 mobile-menu:top-2'>
+              You have selected 
+              <a className='cursor-default text-[#FB4242]'> 
+                <a className='font-bold'> {'#'} </a> 
+              of seats out&nbsp; 
+              </a>
+
+              of your
+
+              <a className='cursor-default text-[#FB4242]'>
+                <a className='font-bold'> {'#'}</a> 
+              &nbsp;tickets
+              </a>
+            </span>
+          </div>
+        </section>
+
+        )
+
+
+          /* Original - Seat select chart */
+          /*<section id='seatChart' className={`modal bg-white h-full`}>
             <div className='flex justify-center items-center mx-[37%] my-0 w-fit'>
               <hr className='border-gray-700 border-[10px] w-[400px] mt-5' />
             </div>
@@ -161,8 +413,7 @@ const SeatSelectChart = (props) => {
               </div>
               
             </div>
-          </section>
-        )
+          </section>*/
       }
     </Popup>
     </>

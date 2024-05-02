@@ -93,7 +93,7 @@ const Tickets = (props) => {
       <article className='grid grid-cols-1 sm:grid-cols-2 mt-16 mobile-menu:mx-8 xl:mx-28 2xl:mx-56 place-items-center gap-x-10 gap-y-3'>
 
         <section 
-          className='w-56 sm:w-60 mobile-menu:w-80 h-auto' 
+          className='w-64 mobile-menu:w-80 h-auto' 
         >
           <img
             src={`${localStorage.getItem("movieImg")}`} 
@@ -109,12 +109,18 @@ const Tickets = (props) => {
           {/* Child tickets */}
           <label className='text-[#192734] dark:text-white text-2xl font-semibold'>Child {'('}0-12yo{')'}</label>
           <div className='wrapper'>
-            <button
-              className="plus-minus minus-btn child-ticket" 
-              onClick={handleOperator}
-            >
-              -
-            </button>
+
+
+
+            <div className='plus-minus-bg ml-[7%] mr-[10%]'>
+
+              <button
+                className="plus-minus minus-btn child-ticket ml-[15.5%]"
+                onClick={handleOperator}
+              >
+                -
+              </button>
+            </div>
             <input
               type="number" 
               className="ticket-count"
@@ -126,66 +132,82 @@ const Tickets = (props) => {
                       : { backgroundColor: "#FFFFFF00" }
                     }
             />
-            <button 
-              className="plus-minus plus-btn child-ticket" 
-              onClick={handleOperator}
-            >
-              +
-            </button>
+            <div className='plus-minus-bg ml-[9.75%]'>
+              <button 
+                className="plus-minus plus-btn child-ticket" 
+                onClick={handleOperator}
+              >
+                +
+              </button>
+            </div>
           </div>
-          <aside className='relative top-[-2.5rem] text-md font-semibold text-[#333333be] dark:text-[#b3b3b3]'>$3.99 per ticket</aside>
+          <aside className='relative top-[-2.5rem] mb-3 text-md font-semibold text-[#333333be] dark:text-[#b3b3b3]'>$3.99 per ticket</aside>
           
 
           {/* General tickets */}
           <label className='text-[#192734] dark:text-white text-2xl font-semibold'>General {'('}13-59yo{')'}</label>
           <div className='wrapper'>
-            <button 
-              className="plus-minus minus-btn general-ticket" 
-              onClick={handleOperator}
-            >
-              -
-            </button>
+            <div className='plus-minus-bg ml-[7%] mr-[10%]'>
+              <button 
+                className="plus-minus minus-btn general-ticket ml-[15.5%]" 
+                onClick={handleOperator}
+              >
+                -
+              </button>
+            </div>
             <input 
               type="number" 
               className="ticket-count" 
               onChange={handleChange}
               value={generalTicketCount} 
               disabled 
-              style={{ backgroundColor: "#FFF" }}
+              style={props.darkMode 
+                      ? { backgroundColor: "#FFF" }
+                      : { backgroundColor: "#FFFFFF00" }
+                    }
             />
-            <button 
-              className="plus-minus plus-btn general-ticket" 
-              onClick={handleOperator}
-            >
-              +
-            </button>
+            <div className='plus-minus-bg ml-[9.75%]'>
+              <button 
+                className="plus-minus plus-btn general-ticket" 
+                onClick={handleOperator}
+              >
+                +
+              </button>
+            </div>
           </div>
-          <aside className='relative top-[-2.5rem] text-md font-semibold text-[#333333be] dark:text-[#b3b3b3]'>$8.99 per ticket</aside>
+          <aside className='relative top-[-2.5rem] mb-3 text-md font-semibold text-[#333333be] dark:text-[#b3b3b3]'>$8.99 per ticket</aside>
 
 
           {/* Senior tickets */}
           <label className='text-[#192734] dark:text-white text-2xl font-semibold'>Senior {'('}60yo-{')'}</label>
           <div className='wrapper'>
-            <button 
-              className="plus-minus minus-btn senior-ticket" 
-              onClick={handleOperator}
-            >
-              -
-            </button>
+            <div className='plus-minus-bg ml-[7%] mr-[10%]'>
+              <button 
+                className="plus-minus minus-btn senior-ticket ml-[15.5%]" 
+                onClick={handleOperator}
+              >
+                -
+              </button>
+            </div>
             <input 
               type="number" 
               className="ticket-count" 
               onChange={handleChange}
               value={seniorTicketCount} 
               disabled 
-              style={{ backgroundColor: "#FFF" }}
+              style={props.darkMode 
+                      ? { backgroundColor: "#FFF" }
+                      : { backgroundColor: "#FFFFFF00" }
+                    }
             />
-            <button 
-              className="plus-minus plus-btn senior-ticket" 
-              onClick={handleOperator}
-            >
-              +
-            </button>
+            <div className='plus-minus-bg ml-[9.75%]'>
+              <button 
+                className="plus-minus plus-btn senior-ticket" 
+                onClick={handleOperator}
+              >
+                +
+              </button>
+            </div>
           </div>
           <aside className='relative top-[-2.5rem] text-md font-semibold text-[#333333be] dark:text-[#b3b3b3]'>$5.99 per ticket</aside>
         </section>

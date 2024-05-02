@@ -86,20 +86,21 @@ const Home = (props) => {
             carouselCell.style.opacity = '0.5';
             carouselCell.style.cursor = 'default';
 
+            // Prevents errors in upcoming section
             if (nowPlayingCell !== undefined) {
               nowPlayingCell.removeEventListener('click', selectMovie); // removes the ability to be selected
             }
-            //carouselCell.className = prevCellClassName;
+            //carouselCell.className = prevCellClassName; // for neonYellowBorder to revert back
             
           } else {
             carouselCell.style.opacity = '1'; 
 
+            // Prevents errors in upcoming section
             if (nowPlayingCell !== undefined) {
               nowPlayingCell.style.cursor = 'pointer';
               nowPlayingCell.addEventListener('click', selectMovie); // allows for selecting movies
             }
             //carouselCell.className = neonYellowBorder;            
-          
           }
           return () => {
             nowPlayingCell.removeEventListener('click', selectMovie);
@@ -170,7 +171,7 @@ const Home = (props) => {
             <img 
               src="src/images/posters/now_playing/mummy_poster.jpg"
               alt='The Mummy'
-              className='w-full h-auto'
+              className='w-auto h-auto'
             />
             <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Mummy</p>
           </div>
@@ -178,7 +179,7 @@ const Home = (props) => {
             <img
               src="src/images/posters/now_playing/frankenstein_poster.jpg"
               alt='Frankenstein'
-              className='w-full h-auto'
+              className='w-auto h-auto'
             />
             <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Frankenstein</p>
           </div>
@@ -186,7 +187,7 @@ const Home = (props) => {
             <img 
               src="src/images/posters/now_playing/invisible_man_poster.jpg"
               alt='The Invisible Man'
-              className='w-full h-auto'
+              className='w-auto h-auto'
             />
             <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>The Invisible Man</p>
           </div>
@@ -217,15 +218,15 @@ const Home = (props) => {
             <img 
               src='src/images/posters/upcoming/swamp_man_poster.jpg' 
               alt='Creature From The Black Lagoon'
-              className='w-full h-auto max-w-[232px]'
+              className='size-auto max-w-[232px]'
             />
-            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3'>Creature From The Black Lagoon</p>
+            <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-1 hover:line-clamp-2'>Creature From The Black Lagoon</p>
           </div>
           <div className="carousel-cell max-w-[232px]">
             <img 
               src='src/images/posters/upcoming/invisible_man_returns_poster.jpg'
               alt='The Invisible Man Returns'
-              className='w-full h-auto max-w-[232px]'
+              className='size-auto max-w-[232px]'
             />
             <p className='bg-gray-300 dark:bg-gray-700 text-[#000] dark:text-white text-center px-1 lg:px-2 py-1 xl:py-2 mx-[-1%] text-lg dark:border-2 border-black lg:text-xl xl:text-2xl font-semibold rounded-b-lg line-clamp-2 hover:line-clamp-3 text-balance'>The Invisible Man Returns</p>
           </div>
