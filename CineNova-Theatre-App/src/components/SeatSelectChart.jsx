@@ -341,7 +341,6 @@ const SeatSelectChart = (props) => {
                     here
                 */
 
-
                 let occupiedChance = Math.floor(Math.random() * 50);
                 if (occupiedChance >= 40) {
                   seats[i].classList.add("occupied");
