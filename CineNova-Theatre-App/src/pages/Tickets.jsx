@@ -5,15 +5,15 @@ import SeatSelectChart from '../components/seatSelectChart';
 const Tickets = (props) => {
 
 
-  let [childTicketCount, setChildTicketCount] = useState(0);
-  let [generalTicketCount, setGeneralTicketCount] = useState(0);
-  let [seniorTicketCount, setSeniorTicketCount] = useState(0);
-  let [totalTicketCount, setTotalTicketCount] = useState(0);
-  let [isTicketsSelected, setIsTicketSelected] = useState(false);
+  let [childTickets, setChildTickets] = useState(0);
+  let [generalTickets, setGeneralTickets] = useState(0);
+  let [seniorTickets, setSeniorTickets] = useState(0);
+  let [totalTickets, setTotalTickets] = useState(0);
+  let [isTicketSelected, setIsTicketSelected] = useState(false);
   /*useEffect(() => {
     const reserveBtn = document.querySelector('#reserve-seats');
     console.log(reserveBtn);
-    if (childTicketCount > 0 || generalTicketCount > 0 || seniorTicketCount > 0) {
+    if (childTickets > 0 || generalTickets > 0 || seniorTickets > 0) {
       reserveBtn.style.background = "#fb4242";
       reserveBtn.style.cursor = "pointer";
     } else {
@@ -26,28 +26,28 @@ const Tickets = (props) => {
   function handleOperator(elem) {
     if (elem.target.className.includes("plus-btn")) {
       switch(true) {
-        case elem.target.className.includes('child-ticket') && childTicketCount !== 10:
-          setChildTicketCount(childTicketCount += 1);
+        case elem.target.className.includes('child-ticket') && childTickets !== 10:
+          setChildTickets(childTickets += 1);
           break;
-        case elem.target.className.includes('general-ticket') && generalTicketCount !== 10:
-          setGeneralTicketCount(generalTicketCount += 1);
+        case elem.target.className.includes('general-ticket') && generalTickets !== 10:
+          setGeneralTickets(generalTickets += 1);
           break;
-        case elem.target.className.includes('senior-ticket')  && seniorTicketCount !== 10:
-          setSeniorTicketCount(seniorTicketCount += 1);
+        case elem.target.className.includes('senior-ticket')  && seniorTickets !== 10:
+          setSeniorTickets(seniorTickets += 1);
           break;
         default:
           console.log("plus button error");
       }
     } else if (elem.target.className.includes("minus-btn")) {
       switch(true) {
-        case elem.target.className.includes('child-ticket') && childTicketCount !== 0:
-          setChildTicketCount(childTicketCount -= 1);
+        case elem.target.className.includes('child-ticket') && childTickets !== 0:
+          setChildTickets(childTickets -= 1);
           break;
-        case elem.target.className.includes('general-ticket') && generalTicketCount !== 0:
-          setGeneralTicketCount(generalTicketCount -= 1);
+        case elem.target.className.includes('general-ticket') && generalTickets !== 0:
+          setGeneralTickets(generalTickets -= 1);
           break;
-        case elem.target.className.includes('senior-ticket') && seniorTicketCount !== 0:
-          setSeniorTicketCount(seniorTicketCount -= 1);
+        case elem.target.className.includes('senior-ticket') && seniorTickets !== 0:
+          setSeniorTickets(seniorTickets -= 1);
           break;
         default:
           console.log("minus button error");
@@ -56,21 +56,19 @@ const Tickets = (props) => {
       console.log("button classes error");
     }
 
-    if (childTicketCount > 0 || generalTicketCount > 0 || seniorTicketCount > 0) {
-      setIsTicketSelected(isTicketsSelected = true);
-      console.log('yay tickets :)');
+    if (childTickets > 0 || generalTickets > 0 || seniorTickets > 0) {
+      setIsTicketSelected(isTicketSelected = true);
     } else {
-      setIsTicketSelected(isTicketsSelected = false); 
-      console.log('no tickets :(');
+      setIsTicketSelected(isTicketSelected = false); 
     }
 
-    setTotalTicketCount(totalTicketCount = childTicketCount + generalTicketCount + seniorTicketCount);
+    setTotalTickets(totalTickets = childTickets + generalTickets + seniorTickets);
   }
 
   const handleChange = (event) => {
-    setChildTicketCount(Number(event.target.value));
-    setGeneralTicketCount(Number(event.target.value));
-    setSeniorTicketCount(Number(event.target.value));
+    setChildTickets(Number(event.target.value));
+    setGeneralTickets(Number(event.target.value));
+    setSeniorTickets(Number(event.target.value));
     Number(event.target.value);
   }
 
@@ -125,7 +123,7 @@ const Tickets = (props) => {
               type="number" 
               className="ticket-count"
               onChange={handleChange}
-              value={childTicketCount}
+              value={childTickets}
               disabled 
               style={props.darkMode 
                       ? { backgroundColor: "#FFF" }
@@ -159,7 +157,7 @@ const Tickets = (props) => {
               type="number" 
               className="ticket-count" 
               onChange={handleChange}
-              value={generalTicketCount} 
+              value={generalTickets} 
               disabled 
               style={props.darkMode 
                       ? { backgroundColor: "#FFF" }
@@ -193,7 +191,7 @@ const Tickets = (props) => {
               type="number" 
               className="ticket-count" 
               onChange={handleChange}
-              value={seniorTicketCount} 
+              value={seniorTickets} 
               disabled 
               style={props.darkMode 
                       ? { backgroundColor: "#FFF" }
@@ -212,7 +210,7 @@ const Tickets = (props) => {
           <aside className='relative top-[-2.5rem] text-md font-semibold text-[#333333be] dark:text-[#b3b3b3]'>$5.99 per ticket</aside>
         </section>
         
-        <SeatSelectChart childTicketCount={childTicketCount} generalTicketCount={generalTicketCount} seniorTicketCount={seniorTicketCount} isTicketsSelected={isTicketsSelected} setIsTicketSelected={setIsTicketSelected} />
+        <SeatSelectChart childTickets={childTickets} generalTickets={generalTickets} seniorTickets={seniorTickets} isTicketSelected={isTicketSelected} setIsTicketSelected={setIsTicketSelected} totalTickets={totalTickets} />
 
       </article>
     </main>
