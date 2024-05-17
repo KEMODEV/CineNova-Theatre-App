@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import '../Tickets.css'
+import {useNavigate} from 'react-router-dom'
 
 const SeatSelectChart = (props) => {
 
-  // const [selectedSeats, setSelectedSeats] = useState([]);
-  const selectedSeats = []; // Holds the seat id for each sleected seat
+  const navgiate = useNavigate();
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  //const selectedSeats = []; // Holds the seat id for each sleected seat
 
   useEffect(() => {
     const reserveBtn = document.querySelector('#reserveSeatsBtn');
@@ -270,37 +272,48 @@ const SeatSelectChart = (props) => {
             <div className='flex flex-col items-center relative mobile-menu:bottom-3'>
               <button 
                 type='submit' 
-                id='goToCheckoutBtn'
-                className='cursor-default transition duration-500 ease-in-out'
+                id='checkoutBtn'
+                className={`cursor-default transition duration-500 ease-in-out ${selectedSeats.length === props.totalTickets ? 'bg-red' : 'bg-gray'}`}
+                onClick={()=>navgiate("/checkout")}
               >
                 Checkout
               </button>
+
+              
               <span className='relative top-3 mobile-menu:top-2 text-lg font-semibold dark:text-white'>
-                You have selected 
-                <span className={`cursor-default ${selectedSeats.length === props.totalTickets ? 'text-[#2EE13F]' : 'text-[#FB4242]'}`}> 
-                  <a className='font-bold'> &nbsp;{selectedSeats.length} </a> 
-                of seats out&nbsp; 
+                You have selected&nbsp;
+                <span className='seats-to-tickets'> 
+                <a id='selectedSeatsText' className='font-bold'>0</a> 
+                &nbsp;of seats out 
                 </span>
 
-                &nbsp;of your
+                &nbsp;of your&nbsp;
 
-                <span className={`cursor-default ${selectedSeats.length === props.totalTickets ? 'text-[#2EE13F]' : 'text-[#FB4242]'}`}>
-                  <a className='font-bold'> &nbsp;{props.totalTickets} </a> 
-                ticket{props.totalTickets > 1 
+                <span className='seats-to-tickets'>
+                  <a id='totalTicketsText' className='font-bold'>{props.totalTickets}</a> 
+                  &nbsp;ticket{props.totalTickets > 1 
                         ? 's' 
                         : ''
                       }
                 </span>
-              </span>
+              </span> 
             </div>
           </section>
 
           {
             useEffect(() => {
               const seats = document.querySelectorAll('div#theater div.seat'); // Excludes example seats
-              
+              const checkoutBtn = document.getElementById('checkoutBtn');
+              const selectedSeatsText = document.getElementById('selectedSeatsText');
+              const seatsToTickets = document.querySelectorAll('.seats-to-tickets');
 
+              /*
+                TODO: 
+                Make it so the selected seat(s) are displayed as selected(green) 
+                when the user clicks off of the theater popup and returns
+              */
 
+              // Called when user clicks on an available seat
               const handleSeatSelect = (elem) => {
                 // Alerts only when users try to add new seats after reaching their ticket amount
                 if (elem.classList.contains("occupied")) {
@@ -318,49 +331,52 @@ const SeatSelectChart = (props) => {
                     elem.classList.add("selected");
                     selectedSeats.push(elem.id);
                   }
+                  setSelectedSeats(selectedSeats);
+                  selectedSeatsText.innerText = String(selectedSeats.length);
                 }
                 console.log("num of seats "+selectedSeats.length);
+
+                if (selectedSeats.length === props.totalTickets) {
+                  checkoutBtn.style.backgroundColor = '#9F42FB';
+                  checkoutBtn.style.cursor = 'pointer';
+                  seatsToTickets[0].style.color = '#2EE13F';
+                  seatsToTickets[1].style.color = '#2EE13F';
+                  
+                } else {
+                  checkoutBtn.style.backgroundColor = '#6c757dab';
+                  checkoutBtn.style.cursor = 'default';
+                  seatsToTickets[0].style.color = '#FB4242';
+                  seatsToTickets[1].style.color = '#FB4242';
+                }
+                  
+                
               }
 
-              
               for (let i = 0; i < seats.length; i++) {
-                seats[i].addEventListener('click', () => handleSeatSelect(seats[i]));
-
-
+                
                 /* 
                   The if-else statments below first rolls for the possibility 
                   of a seat being occupied.
                    - Then, the following statements rolls for the high chance 
                    of a person accomnaying the initial seat. And then  at a lower 
                    chance a third person as well.
-
-
-                  TODO:
-                    Should be made into its own function at the top so it can be
-                    easily turned off or edited without conflicting with this code
-                    here
                 */
 
                 let occupiedChance = Math.floor(Math.random() * 50);
-                if (occupiedChance >= 40) {
+                if (occupiedChance >= 40 && i < seats.length - 2) {
                   seats[i].classList.add("occupied");
 
-                  if (Math.floor(Math.random() * 50 <= 45)) {
-                    seats[i+1].classList.add("occupied");
+                  if (Math.floor(Math.random() * 50 <= 45) && i < seats.length - 1) {
+                    seats[i + 1].classList.add("occupied");
 
                     if (Math.floor(Math.random() * 50 <= 35)) {
-                      seats[i+2].classList.add("occupied");
-                    } else {
-                      break;
+                      seats[i + 2].classList.add("occupied");
                     }
-
-                  } else {
-                    break;
                   }
-                } else {
-                  break;
                 }
+                seats[i].addEventListener('click', () => handleSeatSelect(seats[i]));
               }
+
             })
           }
 

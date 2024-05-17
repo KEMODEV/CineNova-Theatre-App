@@ -309,7 +309,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: #1f1e1e;
 }
 
-#goToCheckoutBtn {
+#checkoutBtn {
     background-color: #6c757dab;
     color: #FFF;
     width: 15rem;

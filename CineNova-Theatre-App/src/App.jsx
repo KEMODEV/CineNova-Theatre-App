@@ -6,7 +6,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Tickets from './pages/Tickets'
-import Billing from './pages/Billing'
+import Checkout from './pages/Checkout'
 
 function App() {
 
@@ -52,8 +52,8 @@ function App() {
           element={<Tickets darkMode={darkMode} />} 
         />
         <Route 
-          path="/billing" 
-          element={<Billing darkMode={darkMode} />} 
+          path="/checkout" 
+          element={<Checkout darkMode={darkMode} />} 
         />
       
       </Routes>
