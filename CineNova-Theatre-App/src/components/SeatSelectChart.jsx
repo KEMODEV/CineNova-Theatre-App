@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import '../Tickets.css'
@@ -6,9 +6,48 @@ import {useNavigate} from 'react-router-dom'
 
 const SeatSelectChart = (props) => {
 
-  const navgiate = useNavigate();
-  const [selectedSeats, setSelectedSeats] = useState([]);
-  //const selectedSeats = []; // Holds the seat id for each sleected seat
+  const navgiate = useNavigate(); // Used to navagte to Checkout page
+  const [selectedSeats, setSelectedSeats] = useState([]); // Stores all user-selected seat IDs
+  const [occupiedSeats, setOccupiedSeats] = useState([]); // Storees the randomized occupied seats; so they don't regenerate again
+  const randExecuted = useRef(false); // If the randomized occupied seats have been chosen
+
+
+  const randOccupiedSeats = (seatArr, idx) => {
+    /* 
+      The if-else statments below first rolls for the possibility 
+      of a seat being occupied.
+        - Then, the following statements rolls for the high chance 
+        of a person accompanying the initial seat. And then  at a lower 
+        chance a third person as well.
+    */
+
+    // 20% chance one seat will be taken
+    if (Math.floor(Math.random() * 100) >= 80 && idx < seatArr.length - 2) {
+      seatArr[idx].classList.add("occupied");
+      occupiedSeats.push(seatArr[idx].id);
+      
+      // 85% chance one seat will be taken
+      if (Math.floor(Math.random() * 100 >= 15) && idx < seatArr.length - 1) {
+        seatArr[idx + 1].classList.add("occupied");
+        occupiedSeats.push(seatArr[idx+1].id);
+
+        // 35% chance one seat will be taken
+        if (Math.floor(Math.random() * 100 >= 65)) {
+          seatArr[idx + 2].classList.add("occupied");
+          occupiedSeats.push(seatArr[idx+2].id);
+        }
+      }
+    }
+    setOccupiedSeats(occupiedSeats);
+    /* 
+      Only sets the randExecuted when all seats have been 
+      given the chance to be occupied
+    */
+    if (seatArr.length === idx+1) {
+      randExecuted.current = true;
+    }
+  }
+
 
   useEffect(() => {
     const reserveBtn = document.querySelector('#reserveSeatsBtn');
@@ -22,6 +61,7 @@ const SeatSelectChart = (props) => {
       reserveBtn.style.background = "#6c757dab";
       reserveBtn.style.cursor = "default";
     }
+
   }, [props.childTicketCount, props.generalTicketCount, props.seniorTicketCount]);
 
   
@@ -210,61 +250,61 @@ const SeatSelectChart = (props) => {
                 </div>
                 <div className="row">
                   <div id='I1' className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
+                  <div id='I2' className="seat"></div>
+                  <div id='I3' className="seat"></div>
+                  <div id='I4' className="seat"></div>
+                  <div id='I5' className="seat"></div>
+                  <div id='I6' className="seat"></div>
+                  <div id='I7' className="seat"></div>
+                  <div id='I8' className="seat"></div>
+                  <div id='I9' className="seat"></div>
+                  <div id='I10' className="seat"></div>
+                  <div id='I11' className="seat"></div>
+                  <div id='I12' className="seat"></div>
+                  <div id='I13' className="seat"></div>
+                  <div id='I14' className="seat"></div>
+                  <div id='I15' className="seat"></div>
+                  <div id='I16' className="seat"></div>
                 </div>
                 <div className="row">
                   <div id='J1' className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
+                  <div id='J2' className="seat"></div>
+                  <div id='J3' className="seat"></div>
+                  <div id='J4' className="seat"></div>
+                  <div id='J5' className="seat"></div>
+                  <div id='J6' className="seat"></div>
+                  <div id='J7' className="seat"></div>
+                  <div id='J8' className="seat"></div>
+                  <div id='J9' className="seat"></div>
+                  <div id='J10' className="seat"></div>
+                  <div id='J11' className="seat"></div>
+                  <div id='J12' className="seat"></div>
+                  <div id='J13' className="seat"></div>
+                  <div id='J14' className="seat"></div>
+                  <div id='J15' className="seat"></div>
+                  <div id='J16' className="seat"></div>
+                  <div id='J17' className="seat"></div>
+                  <div id='J18' className="seat"></div>
                 </div>
                 <div className="row">
                   <div id='K1' className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
-                  <div className="seat"></div>
+                  <div id='K2' className="seat"></div>
+                  <div id='K3' className="seat"></div>
+                  <div id='K4' className="seat"></div>
+                  <div id='K5' className="seat"></div>
+                  <div id='K6' className="seat"></div>
+                  <div id='K7' className="seat"></div>
+                  <div id='K8' className="seat"></div>
+                  <div id='K9' className="seat"></div>
+                  <div id='K10' className="seat"></div>
+                  <div id='K11' className="seat"></div>
+                  <div id='K12' className="seat"></div>
+                  <div id='K13' className="seat"></div>
+                  <div id='K14' className="seat"></div>
+                  <div id='K15' className="seat"></div>
+                  <div id='K16' className="seat"></div>
+                  <div id='K17' className="seat"></div>
+                  <div id='K18' className="seat"></div>
                 </div>
               </div>
             </div>
@@ -274,27 +314,23 @@ const SeatSelectChart = (props) => {
                 type='submit' 
                 id='checkoutBtn'
                 className={`cursor-default transition duration-500 ease-in-out ${selectedSeats.length === props.totalTickets ? 'bg-red' : 'bg-gray'}`}
-                onClick={()=>navgiate("/checkout")}
               >
                 Checkout
               </button>
 
               
-              <span className='relative top-3 mobile-menu:top-2 text-lg font-semibold dark:text-white'>
+              <span className='relative top-3 mobile-menu:top-2 text-lg dark:text-white'>
                 You have selected&nbsp;
                 <span className='seats-to-tickets'> 
-                <a id='selectedSeatsText' className='font-bold'>0</a> 
+                <a id='selectedSeatsText'>0</a> 
                 &nbsp;of seats out 
                 </span>
 
                 &nbsp;of your&nbsp;
 
                 <span className='seats-to-tickets'>
-                  <a id='totalTicketsText' className='font-bold'>{props.totalTickets}</a> 
-                  &nbsp;ticket{props.totalTickets > 1 
-                        ? 's' 
-                        : ''
-                      }
+                  <a id='totalTicketsText'>{props.totalTickets}</a> 
+                  &nbsp;ticket{props.totalTickets > 1 ? 's' : ''}
                 </span>
               </span> 
             </div>
@@ -306,6 +342,16 @@ const SeatSelectChart = (props) => {
               const checkoutBtn = document.getElementById('checkoutBtn');
               const selectedSeatsText = document.getElementById('selectedSeatsText');
               const seatsToTickets = document.querySelectorAll('.seats-to-tickets');
+
+              const goToCheckout = () => {
+                localStorage.setItem("selectedSeats", selectedSeats);
+                // Combines cost for each ticket on Checkout page
+                localStorage.setItem("childTickets", props.childTickets);
+                localStorage.setItem("generalTickets", props.generalTickets);
+                localStorage.setItem("seniorTickets", props.seniorTickets);
+          
+                navgiate("/checkout");
+              }
 
               /*
                 TODO: 
@@ -334,49 +380,43 @@ const SeatSelectChart = (props) => {
                   setSelectedSeats(selectedSeats);
                   selectedSeatsText.innerText = String(selectedSeats.length);
                 }
-                console.log("num of seats "+selectedSeats.length);
+
 
                 if (selectedSeats.length === props.totalTickets) {
                   checkoutBtn.style.backgroundColor = '#9F42FB';
                   checkoutBtn.style.cursor = 'pointer';
+                  checkoutBtn.addEventListener('click', goToCheckout);
+
                   seatsToTickets[0].style.color = '#2EE13F';
                   seatsToTickets[1].style.color = '#2EE13F';
                   
                 } else {
                   checkoutBtn.style.backgroundColor = '#6c757dab';
                   checkoutBtn.style.cursor = 'default';
+                  checkoutBtn.removeEventListener('click', goToCheckout);
+
                   seatsToTickets[0].style.color = '#FB4242';
                   seatsToTickets[1].style.color = '#FB4242';
                 }
-                  
-                
               }
 
               for (let i = 0; i < seats.length; i++) {
-                
-                /* 
-                  The if-else statments below first rolls for the possibility 
-                  of a seat being occupied.
-                   - Then, the following statements rolls for the high chance 
-                   of a person accomnaying the initial seat. And then  at a lower 
-                   chance a third person as well.
-                */
-
-                let occupiedChance = Math.floor(Math.random() * 50);
-                if (occupiedChance >= 40 && i < seats.length - 2) {
-                  seats[i].classList.add("occupied");
-
-                  if (Math.floor(Math.random() * 50 <= 45) && i < seats.length - 1) {
-                    seats[i + 1].classList.add("occupied");
-
-                    if (Math.floor(Math.random() * 50 <= 35)) {
-                      seats[i + 2].classList.add("occupied");
-                    }
+                // Randomize occupied seats
+                if (!randExecuted.current) { // When the seats haven't been selected
+                  randOccupiedSeats(seats, i);
+                } else { // When the seats have been selected, but need to be reenetered
+                  
+                  // Checks if curerent seat ID should be occupied
+                  if (occupiedSeats.includes(seats[i].id)) {
+                    seats[i].classList.add("occupied");
+                  }
+                  if (selectedSeats.includes(seats[i].id)) {
+                    seats[i].classList.add("selected");
                   }
                 }
+
                 seats[i].addEventListener('click', () => handleSeatSelect(seats[i]));
               }
-
             })
           }
 

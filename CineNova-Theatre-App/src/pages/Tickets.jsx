@@ -3,8 +3,6 @@ import '../Tickets.css'
 import SeatSelectChart from '../components/seatSelectChart';
 
 const Tickets = (props) => {
-
-
   let [childTickets, setChildTickets] = useState(0);
   let [generalTickets, setGeneralTickets] = useState(0);
   let [seniorTickets, setSeniorTickets] = useState(0);
@@ -21,7 +19,6 @@ const Tickets = (props) => {
       reserveBtn.style.cursor = "default";
     }
   })*/
-  
 
   function handleOperator(elem) {
     if (elem.target.className.includes("plus-btn")) {

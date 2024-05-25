@@ -321,6 +321,17 @@ input[type=number]::-webkit-outer-spin-button {
     transition: transform 1s ease-in-out;
 }
 
+.seats-to-tickets {
+    font-weight: 600;
+}
+
+/* .seats-to-tickets {
+    color: #FB4242;
+}
+
+.equals {
+    color: #2ee13f;
+} */
 
 @media only screen and (max-width: 640px) {
     .wrapper {
