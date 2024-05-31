@@ -349,6 +349,7 @@ const SeatSelectChart = (props) => {
                 localStorage.setItem("childTickets", props.childTickets);
                 localStorage.setItem("generalTickets", props.generalTickets);
                 localStorage.setItem("seniorTickets", props.seniorTickets);
+                localStorage.setItem("totalTickets", props.totalTickets);
           
                 navgiate("/checkout");
               }
