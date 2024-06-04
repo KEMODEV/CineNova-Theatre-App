@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Tickets from './pages/Tickets'
 import Checkout from './pages/Checkout'
+import TicketsBooked from './pages/TicketsBooked'
 
 function App() {
 
@@ -55,7 +56,10 @@ function App() {
           path="/checkout" 
           element={<Checkout darkMode={darkMode} />} 
         />
-      
+        <Route 
+          path="/tickets-booked" 
+          element={<TicketsBooked darkMode={darkMode} />} 
+        />
       </Routes>
     </Router>    
     </>

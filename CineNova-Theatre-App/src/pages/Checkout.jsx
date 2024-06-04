@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const Checkout = (props) => {
 
   const [subtotal, setSubtotal] = useState(0);
   const [totalTax, setTotalTax] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
+
+  const navigate = useNavigate();
+  localStorage.setItem("selectedSeats", localStorage.getItem("selectedSeats").replace(/,/g, ', ')); // Add spacing after each comma in seat IDs
 
   useEffect(() => {
     const childTickets = localStorage.getItem("childTickets");
@@ -30,23 +34,38 @@ const Checkout = (props) => {
     setTotalCost((subtotal + totalTax).toFixed(2));
   });
 
+  const currentYear = new Date().getFullYear().toString().slice(-2);
+
+  const renderOptions = () => {
+    const options = [];
+    for (let i = 0; i < 26; i++) {
+      const year = parseInt(currentYear) + i;
+      options.push(
+        <option key={year} value={year}>
+          {year}
+        </option>
+      );
+    }
+    return options;
+  };
 
   useEffect(() => {
     const form = document.querySelector('form');
-    const cardExpYear = document.querySelector('#cardExpYear');
     const submitButton = document.querySelector('#purchaseTicketsBtn');
 
-    let curYear = new Date().getFullYear().toString();
-    curYear = Number(curYear.slice(-2)); // 2024 -> 24
-
-    for (let i = 0; i < 26; i++) {
-      let option = document.createElement("option");
-      option.value = curYear + i;
-      option.innerHTML = curYear + i;
-
-      cardExpYear.appendChild(option);
+    const checkProperEmail = (userEmail) => {
+      return !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail));
     }
-    console.log('check')
+    const checkProperCardNum = (userCardNum) => {
+      const pattern = /^(?:\d[ -]*?){13,16}$/;
+      return pattern.test(userCardNum);
+    }
+    const checkProperCVV = (userCVV) => {
+      return !(/^[0-9]{3,4}$/.test(userCVV));
+    }
+    const checkProperFullName = (userFullName) => {
+      return !(/^[a-zA-Z\s'-]{2,50}$/.test(userFullName));
+    }
 
     const handleSubmit = (event) => {
       // Prevent the default form submission
@@ -55,24 +74,64 @@ const Checkout = (props) => {
       // Check if the required fields are filled out
       const requiredInputTags = form.querySelectorAll('input[required]');
       const requiredSelectTags = form.querySelectorAll('select[required]');
-      const requiredFields = [...requiredInputTags, ...requiredSelectTags];
+      const requiredCheckboxTags = form.querySelectorAll('input[type="checkbox"][required]');
+      const requiredFields = [...requiredInputTags, ...requiredSelectTags, ...requiredCheckboxTags];
       let allFieldsFilled = true;
 
       requiredFields.forEach((field) => {
-        if (!field.value) {
-          console.log(field.tagName);
+        /*if (!field.value) {
           allFieldsFilled = false;
-          field.classList.add('border-[#fb4242]'); // Add a class for styling the error state
+          field.style.border = '3px solid #fb4242';
         } else {
-          field.classList.remove('border-[#fb4242]'); // Remove the error class if the field is filled
+          field.style.border = 'none';
+        }*/
+
+        switch (true) {
+          case field.id === 'cardName' && checkProperFullName(field.value.trim()):
+            allFieldsFilled = false;
+            field.style.border = '3px solid #fb4242';
+            break;
+          case field.id === 'cvv' && checkProperCVV(field.value.trim()):
+            allFieldsFilled = false;
+            field.style.border = '3px solid #fb4242';
+            break;
+          case field.id === 'cardExpYear' && !field.value.length > 0:
+            allFieldsFilled = false;
+            field.style.border = '3px solid #fb4242';
+            break;
+          case field.id === 'cardExpMonth' && !field.value.length > 0:
+            allFieldsFilled = false;
+            field.style.border = '3px solid #fb4242';
+            break;
+          case field.id === 'cardNum' && !checkProperCardNum(field.value.trim()):
+            allFieldsFilled = false;
+            field.style.border = '3px solid #fb4242';
+            break;
+          case field.id === 'email' && checkProperEmail(field.value.trim()):
+            allFieldsFilled = false;
+            field.style.border = '3px solid #fb4242';
+            break;
+          case !field.value:
+            allFieldsFilled = false;
+            field.style.border = '3px solid #fb4242';
+            break;
+          default:
+            field.style.border = 'none';
+        }
+
+        // Exclusively for checkboxes since "required" does not work with radio and checkboxes
+        if (field.type === 'checkbox' && !field.checked) {
+          allFieldsFilled = false;
+          field.style.outline = '2px solid #fb4242';
+        } else {
+          field.style.outline = 'none';
         }
       });
 
-      // If all required fields are filled out, submit the form
+      // If all required fields are filled out correctly, submit the form
       if (allFieldsFilled) {
-        form.submit();
+        navigate("/tickets-booked");
       } else {
-        // Display an error message or take other appropriate actions
         alert('Please fill out all required fields.');
       }
     }
@@ -104,9 +163,12 @@ const Checkout = (props) => {
 
         <section 
           className='flex flex-col justify-self-center space-y-5 w-[80%] border-[#192734d0] dark:border-white border-[3px] min-w-[450px] max-w-[600px] pt-8 pb-10 pl-6 mobile-menu:ml-4 bg-[#FFF] dark:bg-[#19273466] rounded-xl shadow-2xl'
-          style={{ boxShadow: "0px 2px 4px 4px rgb(0 0 0 / 0.3)" }}
+          style={ props.darkMode 
+                    ? { boxShadow: "0px 2px 4px 5px rgb(110 110 110 / 0.3)" }
+                    : { boxShadow: "0px 2px 4px 4px rgb(0 0 0 / 0.2)" }
+                }
         >
-          <form>
+          <form method="post">
             <div className='flex flex-row space-x-2'>
               <div className='flex flex-col'>
                 <label htmlFor='email' className='text-lg font-semibold text-[#192734] dark:text-white ml-1'><a className='text-[#fb4242]'>*</a> Email</label>
@@ -154,7 +216,7 @@ const Checkout = (props) => {
             </div>
             <div className='flex flex-row'>
               <div className='flex flex-col'>
-                <label htmlFor='cardExpDate' className='text-lg font-semibold text-[#192734] dark:text-white ml-1'><a className='text-[#fb4242]'>*</a> Exp. Date</label>
+                <label htmlFor='cardExpMonth' className='text-lg font-semibold text-[#192734] dark:text-white ml-1'><a className='text-[#fb4242]'>*</a> Exp. Date</label>
                 <div className='flex flex-row'>
                   <select 
                     id='cardExpMonth' 
@@ -187,6 +249,7 @@ const Checkout = (props) => {
                     required
                   >
                     <option value=''>YY</option>
+                    {renderOptions()}
                   </select>
                 </div>
               </div>  
@@ -218,13 +281,13 @@ const Checkout = (props) => {
               </div>
             </div>
             
-            <div className='w-[81%] min-w-[400px]'>
+            <div className='w-[81%] min-w-[400px] mt-5'>
               <a className='text-[#fb4242]'>* </a>
               <input 
                 type='checkbox' 
                 id='termsConfirmation' 
                 name='termsConfirmation'
-                className='outline-none focus:accent-[#9F42FB] size-4'
+                className='outline-none accent-[#9F42FB] size-4'
                 required
               />
                 
@@ -240,7 +303,10 @@ const Checkout = (props) => {
 
         <section 
           className='flex flex-col justify-self-center space-y-5 w-[90%] mobile-menu:w-[83%] min-w-[400px] max-w-[500px] mobile-menu:max-w-[600px] mt-5 mobile-menu:mr-4 mobile-menu:ml-14 pt-8 pb-10 pl-6 bg-[#192734ea] dark:bg-[#192734ea] rounded-xl' 
-          style={{ boxShadow: "0px 2px 4px 4px rgb(0 0 0 / 0.3)" }}
+          style={ props.darkMode 
+                    ? { boxShadow: "0px 2px 4px 4px rgb(80 80 80 / 0.3)" }
+                    : { boxShadow: "0px 2px 4px 4px rgb(0 0 0 / 0.2)" }
+                }
         >
 
         {/* #9F42FB & #2EE13F */}

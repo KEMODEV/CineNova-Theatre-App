@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom'
 
 const SeatSelectChart = (props) => {
 
-  const navgiate = useNavigate(); // Used to navagte to Checkout page
+  const navigate = useNavigate(); // Used to navagte to Checkout page
   const [selectedSeats, setSelectedSeats] = useState([]); // Stores all user-selected seat IDs
   const [occupiedSeats, setOccupiedSeats] = useState([]); // Storees the randomized occupied seats; so they don't regenerate again
   const randExecuted = useRef(false); // If the randomized occupied seats have been chosen
@@ -351,7 +351,7 @@ const SeatSelectChart = (props) => {
                 localStorage.setItem("seniorTickets", props.seniorTickets);
                 localStorage.setItem("totalTickets", props.totalTickets);
           
-                navgiate("/checkout");
+                navigate("/checkout");
               }
 
               /*

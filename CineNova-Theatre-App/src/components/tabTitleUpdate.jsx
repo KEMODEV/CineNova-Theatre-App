@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom'
 
 const tabTitleUpdate = (props) => {
 
-        //let title = document.title;
         switch (props.location.pathname) {
         case "/contact":
             document.title = "CineNova - Contact";
@@ -17,12 +16,12 @@ const tabTitleUpdate = (props) => {
             document.title = "CineNova - Checkout"; 
             break;
 
-        case "/confirmation":
-            document.title = "CineNova - Purchase Confirmed"; 
+        case "/tickets-booked":
+            document.title = "CineNova - Tickets Booked!"; 
             break;
     
         default:
-            document.title = "CineNova"; 
+            document.title = "CineNova";
             break;
         }
     
